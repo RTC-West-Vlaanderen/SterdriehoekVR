@@ -181,7 +181,7 @@ MonoBehaviour:
     height: 36
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: Main
+  m_LastLoadedLayoutName: 
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -459,7 +459,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 4ac70000
     m_LastClickedID: 51018
-    m_ExpandedIDs: 000000000e1a010000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000b41a0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -488,7 +488,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000000e1a010000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000b41a0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: b2180100
+      m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: cafaffff42fbffffd4b80000f2b9000078bb0000
       m_RenameOverlay:
@@ -1198,9 +1198,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 2.57234, y: 0.815052, z: 0.004760159}
+    m_Target: {x: 2.2489166, y: 0.8550452, z: -0.029041322}
     speed: 2
-    m_Value: {x: -4.5603004, y: -1.2902299, z: 18.525242}
+    m_Value: {x: 2.57234, y: 0.815052, z: 0.004760159}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1246,13 +1246,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.08378721, y: 0.81364685, z: -0.12122334, w: 0.5623924}
+    m_Target: {x: -0.082946286, y: -0.7043495, z: 0.083409436, w: -0.70010304}
     speed: 2
-    m_Value: {x: -0.09567748, y: 0.11836836, z: -0.011832948, w: -0.9888797}
+    m_Value: {x: 0.0837872, y: 0.8136468, z: -0.12122333, w: 0.5623924}
   m_Size:
-    m_Target: 0.52475595
+    m_Target: 0.10361923
     speed: 2
-    m_Value: 10.741751
+    m_Value: 0.52475595
   m_Ortho:
     m_Target: 0
     speed: 2

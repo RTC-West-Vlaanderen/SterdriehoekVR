@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
       public Action onStartAction;
       public Action onCompleteAction;
       public List<XRGrabInteractable> interactablesToEnable;
+      public List<GameObject> objectsToEnable ;
     }
     // Vlaams
     [SerializeField] private List<AudioClip> _instructionClipsVL = new List<AudioClip>();
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     
     [Header("XR Grab Interactable References")]
     [SerializeField] private XRGrabInteractable _LidInteractable;
+    [SerializeField] private XRGrabInteractable _ScrewdriverInteractable;
 
 
     [Header("Params Step1")] 
@@ -37,6 +39,11 @@ public class GameManager : MonoBehaviour
     [Header("Params Step2")] 
     [SerializeField] private bool _IsUserAtWorkbench = false;
     [SerializeField] private WorkBenchTriggerScript _teleportTriggerWorkbench;
+    [Header("Params Step3")]
+    [SerializeField]private LidScrewTriggerScript[] _lidScrewTriggers;
+    private bool _HasUserUnscrewedLid = false;
+    [Header("Params Step4")]
+    [SerializeField] private bool _IsLidRemoved = false;
     private void Awake()
     {
         // Init everything
@@ -62,6 +69,10 @@ public class GameManager : MonoBehaviour
         {
             foreach (var interactable in step.interactablesToEnable) interactable.enabled = true;
         }
+        if (step.objectsToEnable != null)
+        {
+            foreach (var obj in step.objectsToEnable) obj.SetActive(true);
+        }
         step.onStartAction?.Invoke();
     }
 
@@ -72,6 +83,8 @@ public class GameManager : MonoBehaviour
         if (!_HasUserLookedAtFusebox) HasLookedAtFusebox();
         // Check if user is at the workbench
         if (!_IsUserAtWorkbench) IsUserAtWorkbench();
+        // Check if user has unscrewed the lid
+        if (!_HasUserUnscrewedLid) HasUnscrewedLid();
         
         if (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count)
         {
@@ -101,12 +114,31 @@ public class GameManager : MonoBehaviour
             new Step
             {
                 name = "Teleport To workbench",
+                //instructionAudio = _instructionClips[0],
+                // Complete when user is at the workbench
+                
+                completionCondition = () => _IsUserAtWorkbench,
+                
+                //onCompleteAction = () => _goodSFX.Play(),
+            },
+            new Step
+            {
+                name = "Unscrew the lid",
+                interactablesToEnable = new List<XRGrabInteractable>(){_ScrewdriverInteractable} ,
+                //instructionAudio = _instructionClips[0],
+                // Complete when user has unscrewed the lid
+                completionCondition = () => _HasUserUnscrewedLid,
+                //onCompleteAction = () => _goodSFX.Play(),
+            },
+            new Step
+            {
+                name = "Lift the lid",
                 interactablesToEnable = new List<XRGrabInteractable>(){_LidInteractable} ,
                 //instructionAudio = _instructionClips[0],
                 // Complete when user is at the workbench
-                completionCondition = () => _IsUserAtWorkbench,
+                completionCondition = () => _IsLidRemoved,
                 //onCompleteAction = () => _goodSFX.Play(),
-            },
+            }
         };
     }
     
@@ -139,5 +171,16 @@ public class GameManager : MonoBehaviour
             Debug.Log("GameManager: User is at the workbench.");
         }
         return _teleportTriggerWorkbench;
+    }
+    
+    private bool HasUnscrewedLid()
+    {
+        // Check if all lid screw triggers are triggered
+        if (_lidScrewTriggers.All(trigger => trigger.IsTriggerd))
+        {
+            _HasUserUnscrewedLid = true;
+            Debug.Log("GameManager: User has unscrewed the lid.");
+        }
+        return _HasUserUnscrewedLid;
     }
 }
