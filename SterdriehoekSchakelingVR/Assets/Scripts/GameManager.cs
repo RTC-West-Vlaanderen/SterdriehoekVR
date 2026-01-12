@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
-
+using System.Linq;
 public class GameManager : MonoBehaviour
 {
     // this class represents a single step in the tutorial
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
       public Func<bool> completionCondition;
       public Action onStartAction;
       public Action onCompleteAction;
-      public Action interactablesToEnable;
+      public List<XRGrabInteractable> interactablesToEnable;
     }
     // Vlaams
     [SerializeField] private List<AudioClip> _instructionClipsVL = new List<AudioClip>();
@@ -34,7 +34,9 @@ public class GameManager : MonoBehaviour
     [Header("Params Step1")] 
     [SerializeField] private bool _HasUserLookedAtFusebox = false;
     [SerializeField] private FuseBoxCheckTrigger _teleportTrigger;
-    
+    [Header("Params Step2")] 
+    [SerializeField] private bool _IsUserAtWorkbench = false;
+    [SerializeField] private WorkBenchTriggerScript _teleportTriggerWorkbench;
     private void Awake()
     {
         // Init everything
@@ -55,9 +57,12 @@ public class GameManager : MonoBehaviour
     {
         _currentStepIndex++;
         if (_currentStepIndex >= _steps.Count) return;
-        var step = _steps[_currentStepIndex];
+        Step step = _steps[_currentStepIndex];
+        if (step.interactablesToEnable != null)
+        {
+            foreach (var interactable in step.interactablesToEnable) interactable.enabled = true;
+        }
         step.onStartAction?.Invoke();
-        step.interactablesToEnable?.Invoke();
     }
 
     // Update is called once per frame
@@ -65,6 +70,18 @@ public class GameManager : MonoBehaviour
     {
         // Check if user has looked at the fusebox
         if (!_HasUserLookedAtFusebox) HasLookedAtFusebox();
+        // Check if user is at the workbench
+        if (!_IsUserAtWorkbench) IsUserAtWorkbench();
+        
+        if (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count)
+        {
+                
+            if (_steps[_currentStepIndex].completionCondition())
+            {
+                CompleteCurrentStep();
+                StartNextStep();
+            }
+        }
     }
 
     // Initialize the steps of the tutorial
@@ -81,7 +98,22 @@ public class GameManager : MonoBehaviour
                 completionCondition = () => _HasUserLookedAtFusebox,
                 //onCompleteAction = () => _goodSFX.Play(),
             },
+            new Step
+            {
+                name = "Teleport To workbench",
+                interactablesToEnable = new List<XRGrabInteractable>(){_LidInteractable} ,
+                //instructionAudio = _instructionClips[0],
+                // Complete when user is at the workbench
+                completionCondition = () => _IsUserAtWorkbench,
+                //onCompleteAction = () => _goodSFX.Play(),
+            },
         };
+    }
+    
+    private void CompleteCurrentStep()
+    {
+        var step = _steps[_currentStepIndex];
+        step.onCompleteAction?.Invoke();
     }
     
     // Check if user has looked to the zekeringskast/Fusebox
@@ -95,5 +127,17 @@ public class GameManager : MonoBehaviour
             Debug.Log("GameManager: User has looked at the fusebox.");
         }
         return _HasUserLookedAtFusebox;
+    }
+
+    private bool IsUserAtWorkbench()
+    {
+        // Check if the user enters the trigger area of the teleportation trigger
+        if (_teleportTriggerWorkbench.IsTriggerd)
+        {
+            _IsUserAtWorkbench = true;
+            _teleportTriggerWorkbench.IsTriggerd = true;
+            Debug.Log("GameManager: User is at the workbench.");
+        }
+        return _teleportTriggerWorkbench;
     }
 }
