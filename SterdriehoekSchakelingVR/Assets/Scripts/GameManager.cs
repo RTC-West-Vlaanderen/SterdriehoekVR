@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         {
             _HasUserLookedAtFusebox = true;
             _teleportTrigger.IsTriggerd = true;
+            Debug.Log("GameManager: User has looked at the fusebox.");
         }
         // Implement logic to check if the user has looked at the fusebox
         return _HasUserLookedAtFusebox;
