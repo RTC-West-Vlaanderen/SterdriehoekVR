@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FuseBoxCheckTrigger : MonoBehaviour
 {
-    
+    // This script checks if the player has entered the fuse box area
     private bool _IsTriggerd = false;
     public bool IsTriggerd {
         get { return _IsTriggerd; }

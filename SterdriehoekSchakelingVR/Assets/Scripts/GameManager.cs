@@ -5,6 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class GameManager : MonoBehaviour
 {
+    // this class represents a single step in the tutorial
     [System.Serializable]
     public class Step
     {
@@ -15,10 +16,11 @@ public class GameManager : MonoBehaviour
       public Action onCompleteAction;
       public Action interactablesToEnable;
     }
-    // VLaams
+    // Vlaams
     [SerializeField] private List<AudioClip> _instructionClipsVL = new List<AudioClip>();
     // English
     [SerializeField] private List<AudioClip> _instructionClipsEN = new List<AudioClip>();
+    // List of steps in the tutorial
     [SerializeField] private List<Step> _steps = new List<Step>();
     [SerializeField] private List<AudioClip> _instructionClips = new List<AudioClip>();
     private int _currentStepIndex = -1;
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
+        // Init everything
         _instructionClips = _instructionClipsVL; // Future = Make it possible for en
         _steps = new List<Step>();
         InitializeSteps();
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Start the first step starting with step 0
         StartNextStep();
     }
 
@@ -59,10 +63,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check if user has looked at the fusebox
         if (!_HasUserLookedAtFusebox) HasLookedAtFusebox();
     }
 
-
+    // Initialize the steps of the tutorial
     private void InitializeSteps()
     {
         _steps = new List<Step>
@@ -72,6 +77,7 @@ public class GameManager : MonoBehaviour
             {
                 name = "StartInstruction",
                 //instructionAudio = _instructionClips[0],
+                // Complete when user has looked at the fusebox
                 completionCondition = () => _HasUserLookedAtFusebox,
                 //onCompleteAction = () => _goodSFX.Play(),
             },
@@ -81,13 +87,13 @@ public class GameManager : MonoBehaviour
     // Check if user has looked to the zekeringskast/Fusebox
     private bool HasLookedAtFusebox()
     {
+        // Check if the user enters the trigger area of the teleportation trigger
         if (_teleportTrigger.IsTriggerd)
         {
             _HasUserLookedAtFusebox = true;
             _teleportTrigger.IsTriggerd = true;
             Debug.Log("GameManager: User has looked at the fusebox.");
         }
-        // Implement logic to check if the user has looked at the fusebox
         return _HasUserLookedAtFusebox;
     }
 }
