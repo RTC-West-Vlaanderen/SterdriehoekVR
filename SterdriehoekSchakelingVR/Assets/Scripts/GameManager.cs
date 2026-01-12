@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
         if (!_IsUserAtWorkbench) IsUserAtWorkbench();
         // Check if user has unscrewed the lid
         if (!_HasUserUnscrewedLid) HasUnscrewedLid();
+        // Check if lid is removed
+        if (!_IsLidRemoved) IsLidRemoved();
         
         if (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count)
         {
@@ -182,5 +184,16 @@ public class GameManager : MonoBehaviour
             Debug.Log("GameManager: User has unscrewed the lid.");
         }
         return _HasUserUnscrewedLid;
+    }
+    
+    private bool IsLidRemoved()
+    {
+        // Check if the lid interactable is being held
+        if (_LidInteractable.isSelected)
+        {
+            _IsLidRemoved = true;
+            Debug.Log("GameManager: Lid has been removed.");
+        }
+        return _IsLidRemoved;
     }
 }
