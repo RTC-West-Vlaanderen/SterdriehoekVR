@@ -1,0 +1,10 @@
+# ninja log v5
+18	1004	7900876416704295	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	c8197c852277affd
+24	1011	7900876416754498	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	65eca332a210d95e
+43	1034	7900876416999271	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	b7191d366f3efc0c
+1	1035	7900876416989203	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	c876bc1558bd9bfc
+7	1070	7900876417363285	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	13d394d81a697bf0
+52	1229	7900876418954798	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	713f8b90628d88b5
+33	1241	7900876419066199	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	e18a09090ea1655c
+12	1323	7900876419862520	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	d073f92e649ef95e
+1323	1449	7900876421172323	C:/StredriehoekVR/SterdriehoekVR/SterdriehoekSchakelingVR/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/3o264hz4/obj/arm64-v8a/libgame.so	6c0326c40bd8670
