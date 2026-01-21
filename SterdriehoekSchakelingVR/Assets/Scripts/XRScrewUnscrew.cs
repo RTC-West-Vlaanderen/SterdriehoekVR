@@ -82,27 +82,25 @@ public class XRScrewUnscrew : MonoBehaviour
 
     private void ApplyRotation()
     {
-        Quaternion currentRot = screwdriver.rotation;
-        Quaternion delta = currentRot * Quaternion.Inverse(lastDriverRotation);
-
-        delta.ToAngleAxis(out float angle, out Vector3 axis);
-
-        // Calculate rotation around the screw's forward axis (Z-axis)
-        float signedAngle = angle * Mathf.Sign(Vector3.Dot(axis, transform.forward));
-        accumulatedRotation += signedAngle;
-
-        // Calculate progress (0 to 1)
+        // Get accumulated rotation from the screwdriver component
+        SimpleYRotationOnly rotationController = screwdriver.GetComponent<SimpleYRotationOnly>();
+        if (rotationController != null)
+        {
+            float totalRotation = rotationController.GetAccumulatedYRotation();
+        
+            // Use absolute value to ensure positive rotation
+            accumulatedRotation = Mathf.Abs(totalRotation);
+        }
+    
+        // Rest of your existing code...
         float t = Mathf.Clamp01(accumulatedRotation / (turnsToRemove * degreesPerTurn));
-
-        // Move the screw visual along Z-axis (out of the object)
+    
         float lift = t * threadLength * turnsToRemove;
         screwVisual.localPosition = new Vector3(
             screwVisual.localPosition.x,
             screwVisual.localPosition.y,
             initialHeight + lift
         );
-
-        lastDriverRotation = currentRot;
 
         if (t >= 1f)
         {
