@@ -1,11 +1,11 @@
-
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class XRScrewUnscrew : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform screwVisual;
+    [SerializeField] private Transform alignPoint; // The point where screwdriver should attach
     [SerializeField] private float threadLength = 0.1f;
     [SerializeField] private float degreesPerTurn = 360f;
     [SerializeField] private int turnsToRemove = 2;
@@ -14,13 +14,16 @@ public class XRScrewUnscrew : MonoBehaviour
     private float accumulatedRotation;
     private float initialHeight;
     private Transform screwdriver;
+    private Rigidbody screwdriverRb;
+    private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable screwdriverGrab;
 
     private Quaternion lastDriverRotation;
     private bool engaged;
+    private Vector3 targetPosition;
 
     private void Start()
     {
-        initialHeight = screwVisual.localPosition.y;
+        initialHeight = screwVisual.localPosition.z;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,9 +31,26 @@ public class XRScrewUnscrew : MonoBehaviour
         if (!other.CompareTag("Screwdriver"))
             return;
 
+        // Find the XRGrabInteractable component
+        screwdriverGrab = other.GetComponentInParent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+        /*if (screwdriverGrab == null || !screwdriverGrab.isSelected)
+            return;
+        */
         screwdriver = other.transform;
+        screwdriverRb = screwdriver.GetComponent<Rigidbody>();
+        
+        if (screwdriverRb == null)
+            screwdriverRb = screwdriver.GetComponentInParent<Rigidbody>();
+
         lastDriverRotation = screwdriver.rotation;
         engaged = true;
+
+        if (alignPoint != null)
+        {
+            targetPosition = alignPoint.position;
+        }
+
+        Debug.Log("🔧 Screwdriver engaged!");
     }
 
     private void OnTriggerExit(Collider other)
@@ -40,13 +60,23 @@ public class XRScrewUnscrew : MonoBehaviour
 
         engaged = false;
         screwdriver = null;
+        screwdriverGrab = null;
+        screwdriverRb = null;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!engaged || screwdriver == null)
             return;
 
+        // Use physics to lock position instead of direct transform manipulation
+        /*if (alignPoint != null && screwdriverRb != null)
+        {
+            targetPosition = alignPoint.position;
+            Vector3 positionError = targetPosition - screwdriver.position;
+            screwdriverRb.linearVelocity = positionError * positionLockStrength * Time.fixedDeltaTime;
+        }
+        */
         ApplyRotation();
     }
 
@@ -57,18 +87,20 @@ public class XRScrewUnscrew : MonoBehaviour
 
         delta.ToAngleAxis(out float angle, out Vector3 axis);
 
-        float signedAngle = angle * Mathf.Sign(Vector3.Dot(axis, transform.up));
+        // Calculate rotation around the screw's forward axis (Z-axis)
+        float signedAngle = angle * Mathf.Sign(Vector3.Dot(axis, transform.forward));
         accumulatedRotation += signedAngle;
 
+        // Calculate progress (0 to 1)
         float t = Mathf.Clamp01(accumulatedRotation / (turnsToRemove * degreesPerTurn));
 
+        // Move the screw visual along Z-axis (out of the object)
         float lift = t * threadLength * turnsToRemove;
-        screwVisual.localPosition =
-            new Vector3(
-                screwVisual.localPosition.x,
-                screwVisual.localPosition.y,
-                initialHeight + lift
-            );
+        screwVisual.localPosition = new Vector3(
+            screwVisual.localPosition.x,
+            screwVisual.localPosition.y,
+            initialHeight + lift
+        );
 
         lastDriverRotation = currentRot;
 
@@ -82,8 +114,14 @@ public class XRScrewUnscrew : MonoBehaviour
     {
         engaged = false;
         Debug.Log("✅ Screw removed!");
+        
         screwVisual.gameObject.SetActive(false);
         screwVisual.SetParent(null);
+        
+        screwdriver = null;
+        screwdriverGrab = null;
+        screwdriverRb = null;
+        
         enabled = false;
     }
 }
