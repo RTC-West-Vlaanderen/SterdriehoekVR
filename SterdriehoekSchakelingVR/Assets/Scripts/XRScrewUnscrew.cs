@@ -21,6 +21,12 @@ public class XRScrewUnscrew : MonoBehaviour
     private bool engaged;
     private Vector3 targetPosition;
 
+    [SerializeField] private GameObject _ScrewdriverToDisable;
+
+    public bool IsScrewRemoved
+    {
+        get { return !screwVisual.gameObject.activeSelf; }
+    }
     private void Start()
     {
         initialHeight = screwVisual.localPosition.z;
@@ -121,5 +127,7 @@ public class XRScrewUnscrew : MonoBehaviour
         screwdriverRb = null;
         
         enabled = false;
+
+        if (_ScrewdriverToDisable !=null) _ScrewdriverToDisable.SetActive(false);
     }
 }

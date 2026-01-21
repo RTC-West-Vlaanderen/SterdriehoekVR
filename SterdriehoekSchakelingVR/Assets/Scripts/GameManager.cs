@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using System.Linq;
+using NUnit.Framework;
+
 public class GameManager : MonoBehaviour
 {
     // this class represents a single step in the tutorial
@@ -39,9 +41,13 @@ public class GameManager : MonoBehaviour
     [Header("Params Step2")] 
     [SerializeField] private bool _IsUserAtWorkbench = false;
     [SerializeField] private WorkBenchTriggerScript _teleportTriggerWorkbench;
+    [SerializeField]private List<GameObject> _Screwdrivers = new List<GameObject>();
     [Header("Params Step3")]
-    [SerializeField]private LidScrewTriggerScript[] _lidScrewTriggers;
+    [SerializeField]private XRScrewUnscrew[] _screwUnscrews;
+
+    
     private bool _HasUserUnscrewedLid = false;
+    
     [Header("Params Step4")]
     [SerializeField] private bool _IsLidRemoved = false;
     private void Awake()
@@ -120,14 +126,12 @@ public class GameManager : MonoBehaviour
                 // Complete when user is at the workbench
                 
                 completionCondition = () => _IsUserAtWorkbench,
-                
                 //onCompleteAction = () => _goodSFX.Play(),
             },
             new Step
             {
                 name = "Unscrew the lid",
-                interactablesToEnable = new List<XRGrabInteractable>(){_ScrewdriverInteractable} ,
-                //instructionAudio = _instructionClips[0],
+                objectsToEnable = _Screwdrivers,
                 // Complete when user has unscrewed the lid
                 completionCondition = () => _HasUserUnscrewedLid,
                 //onCompleteAction = () => _goodSFX.Play(),
@@ -178,7 +182,7 @@ public class GameManager : MonoBehaviour
     private bool HasUnscrewedLid()
     {
         // Check if all lid screw triggers are triggered
-        if (_lidScrewTriggers.All(trigger => trigger.IsTriggerd))
+        if (_screwUnscrews.All(trigger => trigger.IsScrewRemoved))
         {
             _HasUserUnscrewedLid = true;
             Debug.Log("GameManager: User has unscrewed the lid.");
