@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
     
     [Header("Params Step4")]
     [SerializeField] private bool _IsLidRemoved = false;
+    [Header("Params Step5")]
+    [SerializeField] private List<XRGrabInteractable> _CablesToPlace = new List<XRGrabInteractable>();
     private void Awake()
     {
         // Init everything
@@ -144,7 +146,16 @@ public class GameManager : MonoBehaviour
                 // Complete when user is at the workbench
                 completionCondition = () => _IsLidRemoved,
                 //onCompleteAction = () => _goodSFX.Play(),
-            }
+            },
+            new Step
+            {
+                name = "Place the cables",
+                interactablesToEnable = _CablesToPlace ,
+                //instructionAudio = _instructionClips[0],
+                // Complete when user is at the workbench
+                completionCondition = () => _IsLidRemoved,
+                //onCompleteAction = () => _goodSFX.Play(),
+             }
         };
     }
     
