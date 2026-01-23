@@ -9,6 +9,7 @@ public class XRScrewUnscrew : MonoBehaviour
     [SerializeField] private float threadLength = 0.1f;
     [SerializeField] private float degreesPerTurn = 360f;
     [SerializeField] private int turnsToRemove = 2;
+    [SerializeField] private bool unscrewClockwise = true; // True = clockwise unscrews, False = counter-clockwise unscrews
 
     [Header("Runtime")]
     private float accumulatedRotation;
@@ -27,6 +28,7 @@ public class XRScrewUnscrew : MonoBehaviour
     {
         get { return !screwVisual.gameObject.activeSelf; }
     }
+    
     private void Start()
     {
         initialHeight = screwVisual.localPosition.z;
@@ -39,9 +41,7 @@ public class XRScrewUnscrew : MonoBehaviour
 
         // Find the XRGrabInteractable component
         screwdriverGrab = other.GetComponentInParent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
-        /*if (screwdriverGrab == null || !screwdriverGrab.isSelected)
-            return;
-        */
+        
         screwdriver = other.transform;
         screwdriverRb = screwdriver.GetComponent<Rigidbody>();
         
@@ -75,14 +75,6 @@ public class XRScrewUnscrew : MonoBehaviour
         if (!engaged || screwdriver == null)
             return;
 
-        // Use physics to lock position instead of direct transform manipulation
-        /*if (alignPoint != null && screwdriverRb != null)
-        {
-            targetPosition = alignPoint.position;
-            Vector3 positionError = targetPosition - screwdriver.position;
-            screwdriverRb.linearVelocity = positionError * positionLockStrength * Time.fixedDeltaTime;
-        }
-        */
         ApplyRotation();
     }
 
@@ -94,11 +86,20 @@ public class XRScrewUnscrew : MonoBehaviour
         {
             float totalRotation = rotationController.GetAccumulatedYRotation();
         
-            // Use absolute value to ensure positive rotation
-            accumulatedRotation = Mathf.Abs(totalRotation);
+            // Only count rotation in the correct direction
+            if (unscrewClockwise)
+            {
+                // Clockwise = positive rotation
+                accumulatedRotation = Mathf.Max(0, totalRotation);
+            }
+            else
+            {
+                // Counter-clockwise = negative rotation
+                accumulatedRotation = Mathf.Max(0, -totalRotation);
+            }
         }
     
-        // Rest of your existing code...
+        // Calculate progress (0 to 1)
         float t = Mathf.Clamp01(accumulatedRotation / (turnsToRemove * degreesPerTurn));
     
         float lift = t * threadLength * turnsToRemove;
@@ -107,6 +108,8 @@ public class XRScrewUnscrew : MonoBehaviour
             screwVisual.localPosition.y,
             initialHeight + lift
         );
+
+        Debug.Log($"Screw progress: {t * 100f}% ({accumulatedRotation}° / {turnsToRemove * degreesPerTurn}°)");
 
         if (t >= 1f)
         {
@@ -128,6 +131,6 @@ public class XRScrewUnscrew : MonoBehaviour
         
         enabled = false;
 
-        if (_ScrewdriverToDisable !=null) _ScrewdriverToDisable.SetActive(false);
+        if (_ScrewdriverToDisable != null) _ScrewdriverToDisable.SetActive(false);
     }
 }
