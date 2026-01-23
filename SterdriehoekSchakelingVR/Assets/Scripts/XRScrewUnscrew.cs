@@ -9,7 +9,7 @@ public class XRScrewUnscrew : MonoBehaviour
     [SerializeField] private float threadLength = 0.1f;
     [SerializeField] private float degreesPerTurn = 360f;
     [SerializeField] private int turnsToRemove = 2;
-    [SerializeField] private bool unscrewClockwise = true; // True = clockwise unscrews, False = counter-clockwise unscrews
+    [SerializeField] private bool unscrewClockwise = false; // True = clockwise unscrews, False = counter-clockwise unscrews
 
     [Header("Runtime")]
     private float accumulatedRotation;
@@ -96,6 +96,13 @@ public class XRScrewUnscrew : MonoBehaviour
             {
                 // Counter-clockwise = negative rotation
                 accumulatedRotation = Mathf.Max(0, -totalRotation);
+            }
+            
+            // If screw is at 0% and user rotated the wrong way, reset screwdriver rotation
+            if (accumulatedRotation <= 0)
+            {
+                rotationController.ResetAccumulatedRotation();
+                accumulatedRotation = 0;
             }
         }
     

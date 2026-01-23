@@ -89,4 +89,10 @@ public class SimpleYRotationOnly : MonoBehaviour
     {
         return accumulatedYRotation;
     }
+    // Public method to reset accumulated rotation (called by screw script)
+    public void ResetAccumulatedRotation()
+    {
+        accumulatedYRotation = 0f;
+        lastYRotation = transform.rotation.eulerAngles.y;
+    }
 }
