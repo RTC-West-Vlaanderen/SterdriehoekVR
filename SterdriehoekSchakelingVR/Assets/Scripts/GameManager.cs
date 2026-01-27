@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Params Step1")] [SerializeField]
     private bool _IsUserAtWorkbench = false;
-
+    [SerializeField] private Button _startButton;
     [SerializeField] private WorkBenchTriggerScript _teleportTriggerWorkbench;
 
     [Header("Params step2")] 
@@ -234,6 +234,7 @@ public class GameManager : MonoBehaviour
         {
             _IsUserAtWorkbench = true;
             _teleportTriggerWorkbench.IsTriggerd = true;
+            _startButton.interactable = true;
             Debug.Log("GameManager: User is at the workbench.");
         }
 
