@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using System.Linq;
+using TMPro;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -52,6 +54,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _CorrectButtonPressed = false;
     //[SerializeField] private bool _WrongButtonPressed = false;
     [SerializeField] private GameObject _FirstQuestionPage;
+    
+    [Header("Params Step4")]
+    [SerializeField] private bool _SecondCorrectQuestion = false;
+    [SerializeField] private GameObject _SecondQuestionPage;
+    [SerializeField] private List<TMP_InputField> _SecondQuestionText;
+    
     [Header("Params Step3")] 
     [SerializeField] private bool _HasUserLookedAtFusebox = false;
 
@@ -119,6 +127,7 @@ public class GameManager : MonoBehaviour
         if (!_HasUserUnscrewedLid) HasUnscrewedLid();
         // Check if lid is removed
         if (!_IsLidRemoved) IsLidRemoved();
+        
 
         if (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count)
         {
@@ -154,6 +163,11 @@ public class GameManager : MonoBehaviour
             {
                 name ="Answer question 1",
                 completionCondition = () => _CorrectButtonPressed,
+            },
+            new Step
+            {
+                name ="Answer question 2",
+                completionCondition = () => _SecondCorrectQuestion,
             },
             // Step 0: Initial instruction and teleport
             new Step
@@ -273,9 +287,42 @@ public class GameManager : MonoBehaviour
         // Change button color to green
         // Verander kleur naar rood
         SetButtonColors(btn,Color.green);
-        
+        // Wait a little
+        StartCoroutine(WaitForUserReading());
+        _SecondQuestionPage.SetActive(true);
+        _FirstQuestionPage.SetActive(false);
         Debug.Log("GameManager: User has pressed the correct answer.");
     }
+
+    public void CheckSecondpageAnswers()
+    {
+        bool isCorrect = true;
+
+        foreach (var input in _SecondQuestionText)
+        {
+            string raw = input.text.Trim();
+
+            if (int.TryParse(raw, out int numberFilled) && numberFilled == 230)
+            {
+                input.textComponent.color = Color.green;
+            }
+            else
+            {
+                input.textComponent.color = Color.red;
+                isCorrect = false;
+            }
+        }
+
+        _SecondCorrectQuestion = isCorrect;
+    }
+
+
+    private IEnumerator WaitForUserReading()
+    {
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2f);
+    }
+
 
     private void SetButtonColors(Button btn, Color color)
     {
