@@ -11,47 +11,61 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     public class Step
     {
-      public string name;
-      public AudioClip instructionAudio;
-      public Func<bool> completionCondition;
-      public Action onStartAction;
-      public Action onCompleteAction;
-      public List<XRGrabInteractable> interactablesToEnable;
-      public List<GameObject> objectsToEnable ;
+        public string name;
+        public AudioClip instructionAudio;
+        public Func<bool> completionCondition;
+        public Action onStartAction;
+        public Action onCompleteAction;
+        public List<XRGrabInteractable> interactablesToEnable;
+        public List<GameObject> objectsToEnable;
     }
+
     // Vlaams
     [SerializeField] private List<AudioClip> _instructionClipsVL = new List<AudioClip>();
+
     // English
     [SerializeField] private List<AudioClip> _instructionClipsEN = new List<AudioClip>();
+
     // List of steps in the tutorial
     [SerializeField] private List<Step> _steps = new List<Step>();
     [SerializeField] private List<AudioClip> _instructionClips = new List<AudioClip>();
     private int _currentStepIndex = -1;
-    [SerializeField]private AudioSource _audioSource;
-    
-    
-    [Header("XR Grab Interactable References")]
-    [SerializeField] private XRGrabInteractable _LidInteractable;
+    [SerializeField] private AudioSource _audioSource;
+
+
+    [Header("XR Grab Interactable References")] [SerializeField]
+    private XRGrabInteractable _LidInteractable;
+
     [SerializeField] private XRGrabInteractable _ScrewdriverInteractable;
 
+    [Header("Params Step1")] [SerializeField]
+    private bool _IsUserAtWorkbench = false;
 
-    [Header("Params Step1")] 
-    [SerializeField] private bool _HasUserLookedAtFusebox = false;
-    [SerializeField] private FuseBoxCheckTrigger _teleportTrigger;
-    [Header("Params Step2")] 
-    [SerializeField] private bool _IsUserAtWorkbench = false;
     [SerializeField] private WorkBenchTriggerScript _teleportTriggerWorkbench;
-    [SerializeField]private List<GameObject> _Screwdrivers = new List<GameObject>();
-    [Header("Params Step3")]
-    [SerializeField]private XRScrewUnscrew[] _screwUnscrews;
 
-    
+    [Header("Params step2")] [SerializeField]
+    private bool _HasUserStartedTheApp = false;
+    private bool _HasUserPressedStartButton = false;
+
+    [Header("Params Step2")] [SerializeField]
+    private bool _HasUserLookedAtFusebox = false;
+
+    [SerializeField] private FuseBoxCheckTrigger _teleportTrigger;
+
+    [SerializeField] private List<GameObject> _Screwdrivers = new List<GameObject>();
+
+    [Header("Params Step3")] [SerializeField]
+    private XRScrewUnscrew[] _screwUnscrews;
+
+
     private bool _HasUserUnscrewedLid = false;
-    
-    [Header("Params Step4")]
-    [SerializeField] private bool _IsLidRemoved = false;
-    [Header("Params Step5")]
-    [SerializeField] private List<XRGrabInteractable> _CablesToPlace = new List<XRGrabInteractable>();
+
+    [Header("Params Step4")] [SerializeField]
+    private bool _IsLidRemoved = false;
+
+    [Header("Params Step5")] [SerializeField]
+    private List<XRGrabInteractable> _CablesToPlace = new List<XRGrabInteractable>();
+
     private void Awake()
     {
         // Init everything
@@ -59,8 +73,8 @@ public class GameManager : MonoBehaviour
         _steps = new List<Step>();
         InitializeSteps();
     }
-    
-    
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -77,16 +91,20 @@ public class GameManager : MonoBehaviour
         {
             foreach (var interactable in step.interactablesToEnable) interactable.enabled = true;
         }
+
         if (step.objectsToEnable != null)
         {
             foreach (var obj in step.objectsToEnable) obj.SetActive(true);
         }
+
         step.onStartAction?.Invoke();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Check if user has started the app
+        if (!_HasUserStartedTheApp) HasUserStartedTheApp();
         // Check if user has looked at the fusebox
         if (!_HasUserLookedAtFusebox) HasLookedAtFusebox();
         // Check if user is at the workbench
@@ -95,10 +113,10 @@ public class GameManager : MonoBehaviour
         if (!_HasUserUnscrewedLid) HasUnscrewedLid();
         // Check if lid is removed
         if (!_IsLidRemoved) IsLidRemoved();
-        
+
         if (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count)
         {
-                
+
             if (_steps[_currentStepIndex].completionCondition())
             {
                 CompleteCurrentStep();
@@ -112,6 +130,20 @@ public class GameManager : MonoBehaviour
     {
         _steps = new List<Step>
         {
+            new Step
+            {
+                name = "Teleport To workbench",
+                //instructionAudio = _instructionClips[0],
+                // Complete when user is at the workbench
+
+                completionCondition = () => _IsUserAtWorkbench,
+                //onCompleteAction = () => _goodSFX.Play(),
+            },
+            new Step
+            {
+              name ="Start the app",
+              completionCondition = () => _HasUserStartedTheApp,
+            },
             // Step 0: Initial instruction and teleport
             new Step
             {
@@ -119,15 +151,6 @@ public class GameManager : MonoBehaviour
                 //instructionAudio = _instructionClips[0],
                 // Complete when user has looked at the fusebox
                 completionCondition = () => _HasUserLookedAtFusebox,
-                //onCompleteAction = () => _goodSFX.Play(),
-            },
-            new Step
-            {
-                name = "Teleport To workbench",
-                //instructionAudio = _instructionClips[0],
-                // Complete when user is at the workbench
-                
-                completionCondition = () => _IsUserAtWorkbench,
                 //onCompleteAction = () => _goodSFX.Play(),
             },
             new Step
@@ -141,7 +164,7 @@ public class GameManager : MonoBehaviour
             new Step
             {
                 name = "Lift the lid",
-                interactablesToEnable = new List<XRGrabInteractable>(){_LidInteractable} ,
+                interactablesToEnable = new List<XRGrabInteractable>() { _LidInteractable },
                 //instructionAudio = _instructionClips[0],
                 // Complete when user is at the workbench
                 completionCondition = () => _IsLidRemoved,
@@ -150,21 +173,21 @@ public class GameManager : MonoBehaviour
             new Step
             {
                 name = "Place the cables",
-                interactablesToEnable = _CablesToPlace ,
+                interactablesToEnable = _CablesToPlace,
                 //instructionAudio = _instructionClips[0],
                 // Complete when user is at the workbench
                 completionCondition = () => _IsLidRemoved,
                 //onCompleteAction = () => _goodSFX.Play(),
-             }
+            }
         };
     }
-    
+
     private void CompleteCurrentStep()
     {
         var step = _steps[_currentStepIndex];
         step.onCompleteAction?.Invoke();
     }
-    
+
     // Check if user has looked to the zekeringskast/Fusebox
     private bool HasLookedAtFusebox()
     {
@@ -175,6 +198,7 @@ public class GameManager : MonoBehaviour
             _teleportTrigger.IsTriggerd = true;
             Debug.Log("GameManager: User has looked at the fusebox.");
         }
+
         return _HasUserLookedAtFusebox;
     }
 
@@ -187,9 +211,10 @@ public class GameManager : MonoBehaviour
             _teleportTriggerWorkbench.IsTriggerd = true;
             Debug.Log("GameManager: User is at the workbench.");
         }
+
         return _teleportTriggerWorkbench;
     }
-    
+
     private bool HasUnscrewedLid()
     {
         // Check if all lid screw triggers are triggered
@@ -198,9 +223,10 @@ public class GameManager : MonoBehaviour
             _HasUserUnscrewedLid = true;
             Debug.Log("GameManager: User has unscrewed the lid.");
         }
+
         return _HasUserUnscrewedLid;
     }
-    
+
     private bool IsLidRemoved()
     {
         // Check if the lid interactable is being held
@@ -209,6 +235,23 @@ public class GameManager : MonoBehaviour
             _IsLidRemoved = true;
             Debug.Log("GameManager: Lid has been removed.");
         }
+
         return _IsLidRemoved;
     }
+
+    public void BtnHasUserStartedTheApp()
+    {
+        _HasUserPressedStartButton = true;
+        Debug.Log("GameManager: User has started the app.");
+    }
+
+    private bool HasUserStartedTheApp()
+    {
+        if (_HasUserPressedStartButton)
+        {
+            _HasUserStartedTheApp = true;    
+        }
+        return _HasUserStartedTheApp;
+    }
+
 }
