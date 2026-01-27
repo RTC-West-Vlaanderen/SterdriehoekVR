@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using System.Linq;
-using NUnit.Framework;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,24 +43,29 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private WorkBenchTriggerScript _teleportTriggerWorkbench;
 
-    [Header("Params step2")] [SerializeField]
-    private bool _HasUserStartedTheApp = false;
-    private bool _HasUserPressedStartButton = false;
-
-    [Header("Params Step2")] [SerializeField]
-    private bool _HasUserLookedAtFusebox = false;
+    [Header("Params step2")] 
+    [SerializeField] private bool _HasUserStartedTheApp = false;
+    [SerializeField] private bool _HasUserPressedStartButton = false;
+    [SerializeField] private GameObject _StartPage;
+    
+    [Header("Params step3")] 
+    [SerializeField] private bool _CorrectButtonPressed = false;
+    //[SerializeField] private bool _WrongButtonPressed = false;
+    [SerializeField] private GameObject _FirstQuestionPage;
+    [Header("Params Step3")] 
+    [SerializeField] private bool _HasUserLookedAtFusebox = false;
 
     [SerializeField] private FuseBoxCheckTrigger _teleportTrigger;
 
     [SerializeField] private List<GameObject> _Screwdrivers = new List<GameObject>();
 
-    [Header("Params Step3")] [SerializeField]
-    private XRScrewUnscrew[] _screwUnscrews;
+    [Header("Params Step4")] 
+    [SerializeField] private XRScrewUnscrew[] _screwUnscrews;
 
 
-    private bool _HasUserUnscrewedLid = false;
+    [SerializeField]private bool _HasUserUnscrewedLid = false;
 
-    [Header("Params Step4")] [SerializeField]
+    [Header("Params Step5")] [SerializeField]
     private bool _IsLidRemoved = false;
 
     [Header("Params Step5")] [SerializeField]
@@ -105,6 +110,7 @@ public class GameManager : MonoBehaviour
     {
         // Check if user has started the app
         if (!_HasUserStartedTheApp) HasUserStartedTheApp();
+        
         // Check if user has looked at the fusebox
         if (!_HasUserLookedAtFusebox) HasLookedAtFusebox();
         // Check if user is at the workbench
@@ -143,6 +149,11 @@ public class GameManager : MonoBehaviour
             {
               name ="Start the app",
               completionCondition = () => _HasUserStartedTheApp,
+            },
+            new Step
+            {
+                name ="Answer question 1",
+                completionCondition = () => _CorrectButtonPressed,
             },
             // Step 0: Initial instruction and teleport
             new Step
@@ -242,6 +253,8 @@ public class GameManager : MonoBehaviour
     public void BtnHasUserStartedTheApp()
     {
         _HasUserPressedStartButton = true;
+        _StartPage.SetActive(false);
+        _FirstQuestionPage.SetActive(true);
         Debug.Log("GameManager: User has started the app.");
     }
 
@@ -254,4 +267,31 @@ public class GameManager : MonoBehaviour
         return _HasUserStartedTheApp;
     }
 
+    public void OnCorrectAnswerpressedQ1(Button btn)
+    {
+        _CorrectButtonPressed = true;
+        // Change button color to green
+        // Verander kleur naar rood
+        SetButtonColors(btn,Color.green);
+        
+        Debug.Log("GameManager: User has pressed the correct answer.");
+    }
+
+    private void SetButtonColors(Button btn, Color color)
+    {
+        ColorBlock cb = btn.colors;
+        cb.normalColor = color;
+        cb.selectedColor = color;
+        cb.highlightedColor = color;
+        btn.colors = cb;
+    }
+    public void onNotCorrectButtonPressed(Button btn)
+    {
+        // Change the button color to red
+        Debug.Log("GameManager: User has pressed the wrong answer.");
+        // Get the pressed button
+        
+        Debug.Log("GameManager: User pressed the wrong answer: " + btn.name);
+        SetButtonColors(btn,Color.red);
+    }
 }
