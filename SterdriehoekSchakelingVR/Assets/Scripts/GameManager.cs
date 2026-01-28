@@ -60,6 +60,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _SecondQuestionPage;
     [SerializeField] private List<TMP_InputField> _SecondQuestionText;
     
+    [Header("Params Step5")]
+    [SerializeField] private bool _ThirdCorrectQuestion = false;
+    [SerializeField] private GameObject _ThirdQuestionPage;
+    [SerializeField] private List<TMP_InputField> _ThirdQuestionText;
+    [SerializeField] private List<GameObject> _ThirdQuestionPageObject = new List<GameObject>();
+
+    
     [Header("Params Step3")] 
     [SerializeField] private bool _HasUserLookedAtFusebox = false;
 
@@ -177,6 +184,13 @@ public class GameManager : MonoBehaviour
             {
                 name ="Answer question 2",
                 completionCondition = () => _SecondCorrectQuestion,
+                
+            },
+            new Step
+            {
+                name ="Answer question 3",
+                completionCondition = () => _ThirdCorrectQuestion,
+                objectsToEnable = _ThirdQuestionPageObject
             },
             new Step
             {
@@ -316,9 +330,30 @@ public class GameManager : MonoBehaviour
         }
 
         _SecondCorrectQuestion = isCorrect;
+        if (_SecondCorrectQuestion) _SecondQuestionPage.SetActive(false);
     }
 
+    public void CheckThirdpageAnswers()
+    {
+        bool isCorrect = true;
 
+        foreach (var input in _ThirdQuestionText)
+        {
+            string raw = input.text.Trim();
+
+            if (int.TryParse(raw, out int numberFilled) && numberFilled == 400)
+            {
+                input.textComponent.color = Color.green;
+            }
+            else
+            {
+                input.textComponent.color = Color.red;
+                isCorrect = false;
+            }
+        }
+
+        _ThirdCorrectQuestion = isCorrect;
+    }
     private IEnumerator WaitForUserReading()
     {
         // Wait for 2 seconds
