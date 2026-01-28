@@ -66,6 +66,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<TMP_InputField> _ThirdQuestionText;
     [SerializeField] private List<GameObject> _ThirdQuestionPageObject = new List<GameObject>();
 
+    [Header("Params Step6")]
+    [SerializeField] private bool _ForthCorrectQuestion = false;
+    [SerializeField] private GameObject _FourthQuestionPage;
+    [SerializeField] private List<GameObject> _FourthQuestionPageObject = new List<GameObject>();
     
     [Header("Params Step3")] 
     [SerializeField] private bool _HasUserLookedAtFusebox = false;
@@ -194,6 +198,12 @@ public class GameManager : MonoBehaviour
             },
             new Step
             {
+                name ="Answer question 4",
+                completionCondition = () => _ForthCorrectQuestion,
+                objectsToEnable = _FourthQuestionPageObject
+            },
+            new Step
+            {
                 name = "Unscrew the lid",
                 objectsToEnable = _Screwdrivers,
                 // Complete when user has unscrewed the lid
@@ -304,12 +314,21 @@ public class GameManager : MonoBehaviour
         // Verander kleur naar rood
         SetButtonColors(btn,Color.green);
         // Wait a little
-        StartCoroutine(WaitForUserReading());
-        _SecondQuestionPage.SetActive(true);
-        _FirstQuestionPage.SetActive(false);
+        StartCoroutine(WaitForUserReading(_SecondQuestionPage, _FirstQuestionPage));
+        
         Debug.Log("GameManager: User has pressed the correct answer.");
     }
-
+    public void OnCorrectAnswerpressedQ4(Button btn)
+    {
+        _ForthCorrectQuestion = true;
+        // Change button color to green
+        // Verander kleur naar rood
+        SetButtonColors(btn,Color.green);
+        // Wait a little
+        //StartCoroutine(WaitForUserReading(_SecondQuestionPage, _FirstQuestionPage));
+        
+        Debug.Log("GameManager: User has pressed the correct answer.");
+    }
     public void CheckSecondpageAnswers()
     {
         bool isCorrect = true;
@@ -353,11 +372,19 @@ public class GameManager : MonoBehaviour
         }
 
         _ThirdCorrectQuestion = isCorrect;
+        if (_ThirdCorrectQuestion) _ThirdQuestionPage.SetActive(false);
     }
-    private IEnumerator WaitForUserReading()
+    
+    
+
+    
+    
+    private IEnumerator WaitForUserReading(GameObject page1,GameObject page2)
     {
         // Wait for 2 seconds
         yield return new WaitForSeconds(2f);
+        page1.SetActive(true);
+        page2.SetActive(false);
     }
 
 
