@@ -194,13 +194,13 @@ public class GameManager : MonoBehaviour
             {
                 name ="Answer question 3",
                 completionCondition = () => _ThirdCorrectQuestion,
-                objectsToEnable = _ThirdQuestionPageObject
+                //objectsToEnable = _ThirdQuestionPageObject
             },
             new Step
             {
                 name ="Answer question 4",
                 completionCondition = () => _ForthCorrectQuestion,
-                objectsToEnable = _FourthQuestionPageObject
+                //bjectsToEnable = _FourthQuestionPageObject
             },
             new Step
             {
@@ -325,6 +325,7 @@ public class GameManager : MonoBehaviour
         // Verander kleur naar rood
         SetButtonColors(btn,Color.green);
         // Wait a little
+        
         //StartCoroutine(WaitForUserReading(_SecondQuestionPage, _FirstQuestionPage));
         
         Debug.Log("GameManager: User has pressed the correct answer.");
@@ -349,7 +350,7 @@ public class GameManager : MonoBehaviour
         }
 
         _SecondCorrectQuestion = isCorrect;
-        if (_SecondCorrectQuestion) _SecondQuestionPage.SetActive(false);
+        if (_SecondCorrectQuestion)StartCoroutine(WaitForUserReading(_ThirdQuestionPage,_SecondQuestionPage));
     }
 
     public void CheckThirdpageAnswers()
@@ -372,7 +373,7 @@ public class GameManager : MonoBehaviour
         }
 
         _ThirdCorrectQuestion = isCorrect;
-        if (_ThirdCorrectQuestion) _ThirdQuestionPage.SetActive(false);
+        if (_ThirdCorrectQuestion) StartCoroutine(WaitForUserReading(_FourthQuestionPage, _ThirdQuestionPage));
     }
     
     
