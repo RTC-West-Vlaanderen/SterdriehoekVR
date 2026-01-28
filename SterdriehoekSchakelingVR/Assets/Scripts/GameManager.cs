@@ -72,9 +72,11 @@ public class GameManager : MonoBehaviour
     [Header("Params Step7")]
     [SerializeField] private bool _FifthCorrectQuestion = false;
     [SerializeField] private GameObject _FifthQuestionPage;
-    
-    
-    
+
+    [Header("Params Step8")] 
+    [SerializeField]private bool _SixthCorrectQuestion;
+    [SerializeField] private GameObject _SixthQuestionPage;
+    [SerializeField] private List<TMP_InputField> _SixthQuestionText;
     
     [Header("Params Step3")] 
     [SerializeField] private bool _HasUserLookedAtFusebox = false;
@@ -212,6 +214,11 @@ public class GameManager : MonoBehaviour
             },
             new Step
             {
+                name ="Answer question 6",
+                completionCondition = () => _SixthCorrectQuestion,
+            },
+            new Step
+            {
                 name = "Unscrew the lid",
                 objectsToEnable = _Screwdrivers,
                 // Complete when user has unscrewed the lid
@@ -345,7 +352,7 @@ public class GameManager : MonoBehaviour
         SetButtonColors(btn,Color.green);
         // Wait a little
         
-        //StartCoroutine(WaitForUserReading(_SecondQuestionPage, _FirstQuestionPage));
+        StartCoroutine(WaitForUserReading(_SixthQuestionPage, _FifthQuestionPage));
         
         Debug.Log("GameManager: User has pressed the correct answer.");
     }
@@ -400,7 +407,29 @@ public class GameManager : MonoBehaviour
         if (_ThirdCorrectQuestion) StartCoroutine(WaitForUserReading(_FourthQuestionPage, _ThirdQuestionPage));
     }
     
-    
+    public void CheckSixthpageAnswers()
+    {
+        bool isCorrect = true;
+
+        foreach (var input in _SixthQuestionText)
+        {
+            string raw = input.text.Trim();
+
+            if (raw.ToLower() ==input.name.ToLower())
+            {
+                input.textComponent.color = Color.green;
+            }
+            else
+            {
+                input.textComponent.color = Color.red;
+                isCorrect = false;
+            }
+        }
+
+        _SixthCorrectQuestion = isCorrect;
+        //if (_ThirdCorrectQuestion) StartCoroutine(WaitForUserReading(_FourthQuestionPage, _ThirdQuestionPage));
+        Debug.Log("GameManager: User has pressed the correct answer.");
+    }
 
     
     
