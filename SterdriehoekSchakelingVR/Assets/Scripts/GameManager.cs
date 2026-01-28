@@ -66,13 +66,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private FuseBoxCheckTrigger _teleportTrigger;
 
     [SerializeField] private List<GameObject> _Screwdrivers = new List<GameObject>();
-
+    [SerializeField] private List<Button> _QuestionButtons = new List<Button>();
     [Header("Params Step4")] 
     [SerializeField] private XRScrewUnscrew[] _screwUnscrews;
 
 
     [SerializeField]private bool _HasUserUnscrewedLid = false;
-
+    
     [Header("Params Step5")] [SerializeField]
     private bool _IsLidRemoved = false;
 
@@ -159,6 +159,15 @@ public class GameManager : MonoBehaviour
               name ="Start the app",
               completionCondition = () => _HasUserStartedTheApp,
             },
+            // Step 0: Initial instruction and teleport
+            new Step
+            {
+                name = "StartInstruction",
+                //instructionAudio = _instructionClips[0],
+                // Complete when user has looked at the fusebox
+                completionCondition = () => _HasUserLookedAtFusebox,
+                //onCompleteAction = () => _goodSFX.Play(),
+            },
             new Step
             {
                 name ="Answer question 1",
@@ -168,15 +177,6 @@ public class GameManager : MonoBehaviour
             {
                 name ="Answer question 2",
                 completionCondition = () => _SecondCorrectQuestion,
-            },
-            // Step 0: Initial instruction and teleport
-            new Step
-            {
-                name = "StartInstruction",
-                //instructionAudio = _instructionClips[0],
-                // Complete when user has looked at the fusebox
-                completionCondition = () => _HasUserLookedAtFusebox,
-                //onCompleteAction = () => _goodSFX.Play(),
             },
             new Step
             {
@@ -221,6 +221,7 @@ public class GameManager : MonoBehaviour
         {
             _HasUserLookedAtFusebox = true;
             _teleportTrigger.IsTriggerd = true;
+            foreach (Button btn in _QuestionButtons) btn.interactable = true;
             Debug.Log("GameManager: User has looked at the fusebox.");
         }
 
