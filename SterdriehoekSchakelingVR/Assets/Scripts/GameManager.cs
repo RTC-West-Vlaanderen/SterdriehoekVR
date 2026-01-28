@@ -6,6 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using System.Linq;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard;
 
 public class GameManager : MonoBehaviour
 {
@@ -77,6 +78,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]private bool _SixthCorrectQuestion;
     [SerializeField] private GameObject _SixthQuestionPage;
     [SerializeField] private List<TMP_InputField> _SixthQuestionText;
+    
+    [Header("Keyboard")]
+    [SerializeField] private GlobalNonNativeKeyboard _keyboardManager;
+    [SerializeField] private TMP_InputField _activeInputField;
+    [SerializeField] private GameObject _KeyBoardCoding;
     
     [Header("Params Step3")] 
     [SerializeField] private bool _HasUserLookedAtFusebox = false;
@@ -245,6 +251,27 @@ public class GameManager : MonoBehaviour
             }
         };
     }
+    private void SwitchKeyboard(GameObject keyboardPrefab, TMP_InputField newInput)
+    {
+        // 1. Break focus (CRITICAL)
+        if (_activeInputField != null)
+            _activeInputField.DeactivateInputField();
+        // 2. Hide current keyboard
+        _keyboardManager.HideKeyboard();
+        _keyboardManager = new GlobalNonNativeKeyboard();
+        
+
+        // 3. Assign new prefab (PROPERTY, not method)
+        _keyboardManager.keyboardPrefab = keyboardPrefab;
+        _keyboardManager.keyboard = keyboardPrefab.GetComponent<XRKeyboard>();
+        // 4. Update active input field
+        _activeInputField = newInput;
+        
+        // 5. Re-focus to force rebuild
+        _activeInputField.ActivateInputField();
+        _keyboardManager.ShowKeyboard();
+        
+    }
 
     private void CompleteCurrentStep()
     {
@@ -353,8 +380,12 @@ public class GameManager : MonoBehaviour
         // Wait a little
         
         StartCoroutine(WaitForUserReading(_SixthQuestionPage, _FifthQuestionPage));
-        
-        Debug.Log("GameManager: User has pressed the correct answer.");
+        //_keyboard.keyboard = _KeyBoardCoding;
+        SwitchKeyboard(
+            _KeyBoardCoding,
+            _SixthQuestionText[0]   // coding input field
+        );
+        Debug.Log("GameManager: User has pressed the correct answer. Answer Q5");
     }
     
     
