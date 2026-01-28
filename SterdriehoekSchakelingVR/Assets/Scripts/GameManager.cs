@@ -64,12 +64,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _ThirdCorrectQuestion = false;
     [SerializeField] private GameObject _ThirdQuestionPage;
     [SerializeField] private List<TMP_InputField> _ThirdQuestionText;
-    [SerializeField] private List<GameObject> _ThirdQuestionPageObject = new List<GameObject>();
 
     [Header("Params Step6")]
     [SerializeField] private bool _ForthCorrectQuestion = false;
     [SerializeField] private GameObject _FourthQuestionPage;
-    [SerializeField] private List<GameObject> _FourthQuestionPageObject = new List<GameObject>();
+    
+    [Header("Params Step7")]
+    [SerializeField] private bool _FifthCorrectQuestion = false;
+    [SerializeField] private GameObject _FifthQuestionPage;
+    
+    
+    
     
     [Header("Params Step3")] 
     [SerializeField] private bool _HasUserLookedAtFusebox = false;
@@ -194,13 +199,16 @@ public class GameManager : MonoBehaviour
             {
                 name ="Answer question 3",
                 completionCondition = () => _ThirdCorrectQuestion,
-                //objectsToEnable = _ThirdQuestionPageObject
             },
             new Step
             {
                 name ="Answer question 4",
                 completionCondition = () => _ForthCorrectQuestion,
-                //bjectsToEnable = _FourthQuestionPageObject
+            },
+            new Step
+            {
+                name ="Answer question 5",
+                completionCondition = () => _FifthCorrectQuestion,
             },
             new Step
             {
@@ -325,11 +333,27 @@ public class GameManager : MonoBehaviour
         // Verander kleur naar rood
         SetButtonColors(btn,Color.green);
         // Wait a little
+        StartCoroutine(WaitForUserReading(_FifthQuestionPage, _FourthQuestionPage));
+
+        Debug.Log("GameManager: User has pressed the correct answer.");
+    }
+    public void OnCorrectAnswerpressedQ5(Button btn)
+    {
+        _FifthCorrectQuestion = true;
+        // Change button color to green
+        // Verander kleur naar rood
+        SetButtonColors(btn,Color.green);
+        // Wait a little
         
         //StartCoroutine(WaitForUserReading(_SecondQuestionPage, _FirstQuestionPage));
         
         Debug.Log("GameManager: User has pressed the correct answer.");
     }
+    
+    
+    
+    
+    
     public void CheckSecondpageAnswers()
     {
         bool isCorrect = true;
