@@ -5,6 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class CableTriggerScript : MonoBehaviour
 {
     [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private Material _materialFault;
     [SerializeField] private string _NeededCableName;
     // This script checks if the player has entered the fuse box area
     private bool _IsTriggerd = false;
@@ -30,6 +31,10 @@ public class CableTriggerScript : MonoBehaviour
             other.GetComponent<XRGrabInteractable>().enabled = false;
             // Disable the mesh renderer
             _meshRenderer.enabled = false;
+        }
+        else
+        {
+            _meshRenderer.material = _materialFault;
         }
     }
 }
