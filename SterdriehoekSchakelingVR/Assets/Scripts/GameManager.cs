@@ -117,6 +117,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _CablePage;
     [SerializeField] private List<CableTriggerScript> _CableSockets = new List<CableTriggerScript>();
+
+    [Header("Params Step12")] [SerializeField]
+    private bool _AreConnectorsCorrect =false;
+    [SerializeField] private List<XRGrabInteractable> _connectorsGrabInteractables = new List<XRGrabInteractable>();
+
+    [SerializeField]private List<GameObject> _ConnectorTriggers = new List<GameObject>();
     
     private void Awake()
     {
@@ -124,7 +130,6 @@ public class GameManager : MonoBehaviour
         _instructionClips = _instructionClipsVL; // Future = Make it possible for en
         _steps = new List<Step>();
         InitializeSteps();
-        
     }
 
 
@@ -167,6 +172,9 @@ public class GameManager : MonoBehaviour
         if (!_HasUserUnscrewedLid) HasUnscrewedLid();
         // Check if lid is removed
         if (!_IsLidRemoved) IsLidRemoved();
+
+        if (!_AreCablesCorrect)_AreCablesPlacedCorrectly();
+        
         
 
         if (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count)
@@ -263,6 +271,13 @@ public class GameManager : MonoBehaviour
                 // Complete when user is at the workbench
                 completionCondition = () => _AreCablesCorrect,
                 //onCompleteAction = () => _goodSFX.Play(),
+            },
+            new Step
+            {
+                name = "Place the connectors",
+                objectsToEnable = _ConnectorTriggers,
+                interactablesToEnable = _connectorsGrabInteractables,
+                completionCondition = () => _AreConnectorsCorrect,
             }
         };
     }
@@ -314,6 +329,20 @@ public class GameManager : MonoBehaviour
         }
         
         return _HasUserUnscrewedLid;
+    }
+    
+    
+    private bool _AreCablesPlacedCorrectly()
+    {
+        // Check if all cable sockets are triggered
+        if (_CableSockets.All(socket => socket.IsTriggerd))
+        {
+            _AreCablesCorrect = true;
+            Debug.Log("GameManager: All cables are placed correctly.");
+            StartCoroutine(WaitForUserReading(_CablePage, _EightQuestionPage));
+        }
+
+        return _AreCablesCorrect;
     }
 
     private bool IsLidRemoved()
