@@ -1,8 +1,10 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class CableTriggerScript : MonoBehaviour
 {
+    [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private string _NeededCableName;
     // This script checks if the player has entered the fuse box area
     private bool _IsTriggerd = false;
@@ -18,12 +20,16 @@ public class CableTriggerScript : MonoBehaviour
         }
     }
     
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(_NeededCableName))
         {
             _IsTriggerd = true;
             Debug.Log("CableTriggerScript: Triggered" + _NeededCableName);
+            // Get the XR Grab Interactable component
+            other.GetComponent<XRGrabInteractable>().enabled = false;
+            // Disable the mesh renderer
+            _meshRenderer.enabled = false;
         }
     }
 }
