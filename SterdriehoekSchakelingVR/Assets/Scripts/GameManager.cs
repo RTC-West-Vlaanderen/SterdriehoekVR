@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard;
 using UnityEngine.XR.Interaction.Toolkit.UI;
 
@@ -110,6 +111,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _EightQuestionPage;
     [Header("Params Step11")] [SerializeField]
     private List<XRGrabInteractable> _CablesToPlace = new List<XRGrabInteractable>();
+
+    [Header("Params Step11")] [SerializeField]
+    private bool _AreCablesCorrect = false;
+
+    [SerializeField] private GameObject _CablePage;
+    [SerializeField] private List<CableTriggerScript> _CableSockets = new List<CableTriggerScript>();
     
     private void Awake()
     {
@@ -117,6 +124,7 @@ public class GameManager : MonoBehaviour
         _instructionClips = _instructionClipsVL; // Future = Make it possible for en
         _steps = new List<Step>();
         InitializeSteps();
+        
     }
 
 
@@ -253,7 +261,7 @@ public class GameManager : MonoBehaviour
                 interactablesToEnable = _CablesToPlace,
                 //instructionAudio = _instructionClips[0],
                 // Complete when user is at the workbench
-                completionCondition = () => _IsLidRemoved,
+                completionCondition = () => _AreCablesCorrect,
                 //onCompleteAction = () => _goodSFX.Play(),
             }
         };
