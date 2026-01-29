@@ -10,6 +10,7 @@ TagManager:
   - BrownRope
   - BlackRope
   - GrayRope
+  - YellowGreenRope
   layers:
   - Default
   - TransparentFX
