@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _EightQuestionPage;
     [Header("Params Step11")] [SerializeField]
     private List<XRGrabInteractable> _CablesToPlace = new List<XRGrabInteractable>();
-
+    
     private void Awake()
     {
         // Init everything
