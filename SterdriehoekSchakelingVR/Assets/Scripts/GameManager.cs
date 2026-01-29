@@ -94,16 +94,21 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private List<GameObject> _Screwdrivers = new List<GameObject>();
     [SerializeField] private List<Button> _QuestionButtons = new List<Button>();
-    [Header("Params Step4")] 
+    
+    [Header("Params Step9")] 
     [SerializeField] private XRScrewUnscrew[] _screwUnscrews;
-
+    
 
     [SerializeField]private bool _HasUserUnscrewedLid = false;
-    
-    [Header("Params Step5")] [SerializeField]
-    private bool _IsLidRemoved = false;
+    [SerializeField] private GameObject _SeventhQuestionPage;
 
-    [Header("Params Step5")] [SerializeField]
+    
+    
+    
+    [Header("Params Step10")] [SerializeField]
+    private bool _IsLidRemoved = false;
+    [SerializeField] private GameObject _EightQuestionPage;
+    [Header("Params Step11")] [SerializeField]
     private List<XRGrabInteractable> _CablesToPlace = new List<XRGrabInteractable>();
 
     private void Awake()
@@ -232,7 +237,6 @@ public class GameManager : MonoBehaviour
                 objectsToEnable = _Screwdrivers,
                 // Complete when user has unscrewed the lid
                 completionCondition = () => _HasUserUnscrewedLid,
-                //onCompleteAction = () => _goodSFX.Play(),
             },
             new Step
             {
@@ -297,9 +301,10 @@ public class GameManager : MonoBehaviour
         if (_screwUnscrews.All(trigger => trigger.IsScrewRemoved))
         {
             _HasUserUnscrewedLid = true;
+            if (_SixthCorrectQuestion) StartCoroutine(WaitForUserReading(_EightQuestionPage, _SeventhQuestionPage));
             Debug.Log("GameManager: User has unscrewed the lid.");
         }
-
+        
         return _HasUserUnscrewedLid;
     }
 
@@ -438,7 +443,7 @@ public class GameManager : MonoBehaviour
         }
 
         _SixthCorrectQuestion = isCorrect;
-        //if (_ThirdCorrectQuestion) StartCoroutine(WaitForUserReading(_FourthQuestionPage, _ThirdQuestionPage));
+        if (_SixthCorrectQuestion) StartCoroutine(WaitForUserReading(_SeventhQuestionPage, _SixthQuestionPage));
         Debug.Log("GameManager: User has pressed the correct answer.");
     }
 
