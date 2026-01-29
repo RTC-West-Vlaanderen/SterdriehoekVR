@@ -114,323 +114,63 @@ MonoBehaviour:
     m_KeyFunction: {fileID: 0}
     m_KeyCode: 0
     m_Disabled: 0
-  - m_Character: q
-    m_DisplayCharacter: q
+  - m_Character: U1
+    m_DisplayCharacter: U1
     m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: Q
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 11400000, guid: 5e3d82ae0a9ac0d43ada00a218daeefd, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: w
-    m_DisplayCharacter: w
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: W
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 11400000, guid: 5e3d82ae0a9ac0d43ada00a218daeefd, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: e
-    m_DisplayCharacter: e
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: E
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 11400000, guid: 5e3d82ae0a9ac0d43ada00a218daeefd, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: r
-    m_DisplayCharacter: r
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: R
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 11400000, guid: 5e3d82ae0a9ac0d43ada00a218daeefd, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: t
-    m_DisplayCharacter: t
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: T
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 11400000, guid: 5e3d82ae0a9ac0d43ada00a218daeefd, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: y
-    m_DisplayCharacter: y
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: Y
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 11400000, guid: 5e3d82ae0a9ac0d43ada00a218daeefd, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: u
-    m_DisplayCharacter: u
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: U
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 11400000, guid: 5e3d82ae0a9ac0d43ada00a218daeefd, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: i
-    m_DisplayCharacter: i
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: I
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 11400000, guid: 5e3d82ae0a9ac0d43ada00a218daeefd, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: o
-    m_DisplayCharacter: o
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: O
+    m_ShiftCharacter: U1
     m_ShiftDisplayCharacter: 
     m_ShiftDisplayIcon: {fileID: 0}
     m_OverrideDefaultKeyFunction: 0
     m_KeyFunction: {fileID: 0}
     m_KeyCode: 0
     m_Disabled: 0
-  - m_Character: p
-    m_DisplayCharacter: p
+  - m_Character: U2
+    m_DisplayCharacter: U2
     m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: P
+    m_ShiftCharacter: U2
     m_ShiftDisplayCharacter: 
     m_ShiftDisplayIcon: {fileID: 0}
     m_OverrideDefaultKeyFunction: 0
     m_KeyFunction: {fileID: 0}
     m_KeyCode: 0
     m_Disabled: 0
-  - m_Character: a
-    m_DisplayCharacter: a
+  - m_Character: V1
+    m_DisplayCharacter: V1
     m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: A
+    m_ShiftCharacter: V1
     m_ShiftDisplayCharacter: 
     m_ShiftDisplayIcon: {fileID: 0}
     m_OverrideDefaultKeyFunction: 0
     m_KeyFunction: {fileID: 0}
     m_KeyCode: 0
     m_Disabled: 0
-  - m_Character: s
-    m_DisplayCharacter: s
+  - m_Character: V2
+    m_DisplayCharacter: V2
     m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: S
+    m_ShiftCharacter: V2
     m_ShiftDisplayCharacter: 
     m_ShiftDisplayIcon: {fileID: 0}
     m_OverrideDefaultKeyFunction: 0
     m_KeyFunction: {fileID: 0}
     m_KeyCode: 0
     m_Disabled: 0
-  - m_Character: d
-    m_DisplayCharacter: d
+  - m_Character: W1
+    m_DisplayCharacter: W1
     m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: D
+    m_ShiftCharacter: W1
     m_ShiftDisplayCharacter: 
     m_ShiftDisplayIcon: {fileID: 0}
     m_OverrideDefaultKeyFunction: 0
     m_KeyFunction: {fileID: 0}
     m_KeyCode: 0
     m_Disabled: 0
-  - m_Character: f
-    m_DisplayCharacter: f
+  - m_Character: W2
+    m_DisplayCharacter: W2
     m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: F
+    m_ShiftCharacter: W2
     m_ShiftDisplayCharacter: 
     m_ShiftDisplayIcon: {fileID: 0}
     m_OverrideDefaultKeyFunction: 0
     m_KeyFunction: {fileID: 0}
     m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: g
-    m_DisplayCharacter: g
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: G
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: h
-    m_DisplayCharacter: h
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: H
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: j
-    m_DisplayCharacter: j
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: J
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: k
-    m_DisplayCharacter: k
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: K
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: l
-    m_DisplayCharacter: l
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: L
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: \s
-    m_DisplayCharacter: shift
-    m_DisplayIcon: {fileID: 373736265, guid: e6a95303640ef3c4188ac4583185f5ba, type: 3}
-    m_ShiftCharacter: \s
-    m_ShiftDisplayCharacter: shift
-    m_ShiftDisplayIcon: {fileID: 373736265, guid: e6a95303640ef3c4188ac4583185f5ba, type: 3}
-    m_OverrideDefaultKeyFunction: 1
-    m_KeyFunction: {fileID: 11400000, guid: fd75c3033834cc447bf5886f0424c0b9, type: 2}
-    m_KeyCode: 304
-    m_Disabled: 0
-  - m_Character: z
-    m_DisplayCharacter: z
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: Z
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: x
-    m_DisplayCharacter: x
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: X
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: c
-    m_DisplayCharacter: c
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: C
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: v
-    m_DisplayCharacter: v
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: V
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: b
-    m_DisplayCharacter: b
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: B
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: n
-    m_DisplayCharacter: n
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: N
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: m
-    m_DisplayCharacter: m
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: M
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 0}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: \h
-    m_DisplayCharacter: Hide
-    m_DisplayIcon: {fileID: 1163011659, guid: e6a95303640ef3c4188ac4583185f5ba, type: 3}
-    m_ShiftCharacter: \h
-    m_ShiftDisplayCharacter: Hide
-    m_ShiftDisplayIcon: {fileID: 1163011659, guid: e6a95303640ef3c4188ac4583185f5ba, type: 3}
-    m_OverrideDefaultKeyFunction: 1
-    m_KeyFunction: {fileID: 11400000, guid: fafb46c355cbf0c4ab314558d216a90f, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: \e
-    m_DisplayCharacter: 
-    m_DisplayIcon: {fileID: 1365469357, guid: e6a95303640ef3c4188ac4583185f5ba, type: 3}
-    m_ShiftCharacter: \e
-    m_ShiftDisplayCharacter: 
-    m_ShiftDisplayIcon: {fileID: 1365469357, guid: e6a95303640ef3c4188ac4583185f5ba, type: 3}
-    m_OverrideDefaultKeyFunction: 1
-    m_KeyFunction: {fileID: 11400000, guid: abe6f1e7debe4b842a92014211d944fb, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 1
-  - m_Character: \sym
-    m_DisplayCharacter: '#+='
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: \sym
-    m_ShiftDisplayCharacter: '#+='
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 1
-    m_KeyFunction: {fileID: 11400000, guid: abe6f1e7debe4b842a92014211d944fb, type: 2}
-    m_KeyCode: 0
-    m_Disabled: 0
-  - m_Character: ' '
-    m_DisplayCharacter: Space
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: ' '
-    m_ShiftDisplayCharacter: Space
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 0
-    m_KeyFunction: {fileID: 11400000, guid: 5e3d82ae0a9ac0d43ada00a218daeefd, type: 2}
-    m_KeyCode: 32
-    m_Disabled: 0
-  - m_Character: \r
-    m_DisplayCharacter: Enter
-    m_DisplayIcon: {fileID: 0}
-    m_ShiftCharacter: \r
-    m_ShiftDisplayCharacter: Enter
-    m_ShiftDisplayIcon: {fileID: 0}
-    m_OverrideDefaultKeyFunction: 1
-    m_KeyFunction: {fileID: 11400000, guid: 2ff02eb02547eaf41855aabb5c603f8b, type: 2}
-    m_KeyCode: 13
     m_Disabled: 0
