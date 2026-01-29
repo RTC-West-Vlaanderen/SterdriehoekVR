@@ -11,6 +11,8 @@ TagManager:
   - BlackRope
   - GrayRope
   - YellowGreenRope
+  - Connector
+  - Wrong
   layers:
   - Default
   - TransparentFX
