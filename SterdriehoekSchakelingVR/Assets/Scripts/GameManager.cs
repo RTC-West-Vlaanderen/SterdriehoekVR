@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _CablePage;
     [SerializeField] private List<CableTriggerScript> _CableSockets = new List<CableTriggerScript>();
-
+    [SerializeField] private List<XRGrabInteractable> _CablesGrab = new List<XRGrabInteractable>(); 
     [Header("Params Step12")] [SerializeField]
     private bool _AreConnectorsCorrect =false;
     [SerializeField] private List<XRGrabInteractable> _connectorsGrabInteractables = new List<XRGrabInteractable>();
@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
 
 
     [SerializeField] private List<ConnectorScript> _CorrectConnectors = new List<ConnectorScript>();
+    [SerializeField] private GameObject _ConnectorPage;
     private void Awake()
     {
         // Init everything
@@ -343,8 +344,18 @@ public class GameManager : MonoBehaviour
         if (_CableSockets.All(socket => socket.IsTriggerd))
         {
             _AreCablesCorrect = true;
+            // Disable all there grab intecactables
+            foreach (var socket in _CablesGrab)
+            {
+                if (socket != null)
+                {
+                    // Disable the grab interactable so it can't be picked up again
+                    socket.enabled = false;
+                    Debug.Log($"Disabled grab interactable for socket: {socket.name}");
+                }
+            }
             Debug.Log("GameManager: All cables are placed correctly.");
-            //StartCoroutine(WaitForUserReading(_ConnectorPage,_CablePage ));
+            StartCoroutine(WaitForUserReading(_ConnectorPage,_CablePage ));
         }
 
         return _AreCablesCorrect;
