@@ -121,9 +121,11 @@ public class GameManager : MonoBehaviour
     [Header("Params Step12")] [SerializeField]
     private bool _AreConnectorsCorrect =false;
     [SerializeField] private List<XRGrabInteractable> _connectorsGrabInteractables = new List<XRGrabInteractable>();
-
-    [SerializeField]private List<GameObject> _ConnectorTriggers = new List<GameObject>();
     
+    [SerializeField]private List<GameObject> _ConnectorTriggers = new List<GameObject>();
+
+
+    [SerializeField] private List<ConnectorScript> _CorrectConnectors = new List<ConnectorScript>();
     private void Awake()
     {
         // Init everything
@@ -174,6 +176,9 @@ public class GameManager : MonoBehaviour
         if (!_IsLidRemoved) IsLidRemoved();
 
         if (!_AreCablesCorrect)_AreCablesPlacedCorrectly();
+
+        if (!_AreConnectorsCorrect) _AreConnectorsPlacedCorrectly();
+        
         
         
 
@@ -339,10 +344,22 @@ public class GameManager : MonoBehaviour
         {
             _AreCablesCorrect = true;
             Debug.Log("GameManager: All cables are placed correctly.");
-            StartCoroutine(WaitForUserReading(_CablePage, _EightQuestionPage));
+            //StartCoroutine(WaitForUserReading(_ConnectorPage,_CablePage ));
         }
 
         return _AreCablesCorrect;
+    }
+
+    private bool _AreConnectorsPlacedCorrectly()
+    {
+        if (_CorrectConnectors.All(connector => connector.IsTriggerd))
+        {
+            _AreConnectorsCorrect = true;
+            Debug.Log("GameManager: All connectors are placed correctly.");
+            //StartCoroutine(WaitForUserReading())
+        }
+
+        return _AreConnectorsCorrect;
     }
 
     private bool IsLidRemoved()
@@ -352,6 +369,7 @@ public class GameManager : MonoBehaviour
         {
             _IsLidRemoved = true;
             Debug.Log("GameManager: Lid has been removed.");
+            StartCoroutine(WaitForUserReading(_CablePage, _EightQuestionPage));
         }
 
         return _IsLidRemoved;

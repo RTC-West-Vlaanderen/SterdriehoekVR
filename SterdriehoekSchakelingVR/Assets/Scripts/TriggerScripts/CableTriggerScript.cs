@@ -22,7 +22,8 @@ public class CableTriggerScript : MonoBehaviour
             }
         }
     }
-    
+
+    public bool isCorrect = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(_NeededCableName))
@@ -30,7 +31,7 @@ public class CableTriggerScript : MonoBehaviour
             _IsTriggerd = true;
             Debug.Log("CableTriggerScript: Triggered" + _NeededCableName);
             // Get the XR Grab Interactable component
-            other.GetComponent<XRGrabInteractable>().enabled = false;
+            //other.GetComponent<XRGrabInteractable>().enabled = false;
             // Disable the mesh renderer
             _meshRenderer.enabled = false;
             _Bolt.SetActive(true);
