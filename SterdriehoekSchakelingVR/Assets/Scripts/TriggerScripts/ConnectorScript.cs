@@ -29,25 +29,14 @@ public class ConnectorScript : MonoBehaviour
             _IsTriggerd = true;
             Debug.Log("CableTriggerScript: Triggered" + _NeededName);
             // Get the XR Grab Interactable component
-            other.GetComponent<XRGrabInteractable>().enabled = false;
+            //other.GetComponent<XRGrabInteractable>().enabled = false;
             // Disable the mesh 
-            if (_meshRenderer !=null)
-            {
-                _meshRenderer.enabled = false;
-            }
-
+           
             if (_Bolt != null)
             {
                 _Bolt.SetActive(true);    
             }
             
-        }
-        else
-        {
-            if (_meshRenderer != null)
-            {
-                _meshRenderer.material = _materialFault;    
-            }
         }
     }
 }
