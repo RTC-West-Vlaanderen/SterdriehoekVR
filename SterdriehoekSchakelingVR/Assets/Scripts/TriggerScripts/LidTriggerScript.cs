@@ -35,6 +35,8 @@ public class LidTriggerScript : MonoBehaviour
         if (arg0.interactableObject.transform.gameObject.CompareTag("Lid"))
         {
             IsTriggerd = true;
+            // Disable XR Grab Interactable to prevent further interaction
+            UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = arg0.interactableObject.transform.gameObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
         }
     }
 }
