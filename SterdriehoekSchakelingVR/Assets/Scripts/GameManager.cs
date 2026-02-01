@@ -134,7 +134,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _IsLidPlaced = false;
     [SerializeField] private GameObject _LidTrigger;
     [SerializeField] private LidTriggerScript _lidTriggerScript;
+    [Header("Params Step 14")]
+    [SerializeField] private List<GameObject> _Screws = new List<GameObject>();
     
+
     
     private void Awake()
     {
@@ -191,6 +194,7 @@ public class GameManager : MonoBehaviour
 
         if (!_IsLidPlaced) IsLidPlaced();
         
+        //if (!_HasUserScrewedLidBack) HasScrewedLidBack();
 
         if (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count)
         {
@@ -203,6 +207,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+   /* private bool HasScrewedLidBack()
+    {
+        // Check if all XRScrewBack instances report the screw as no longer removed
+        // (i.e. every screw has been fully screwed back in)
+        if (_screwBacks != null && _screwBacks.Length > 0
+                                && _screwBacks.All(sb => !sb.IsScrewRemoved))
+        {
+            _HasUserScrewedLidBack = true;
+            Debug.Log("GameManager: User has screwed the lid back on.");
+        }
+
+        return _HasUserScrewedLidBack;
+    }
+*/
     // Initialize the steps of the tutorial
     private void InitializeSteps()
     {
@@ -299,7 +317,13 @@ public class GameManager : MonoBehaviour
                 name = "Place the lid back in",
                 objectsToEnable = new List<GameObject>(){_LidTrigger},
                 completionCondition = () => _IsLidPlaced,
-            }
+            },
+            /*new Step
+            {
+                name = "Screw the lid back on",
+                objectsToEnable = _ScrewBackScrewdrivers,
+                completionCondition = () => _HasUserScrewedLidBack,
+            }*/
         };
     }
 
@@ -396,6 +420,11 @@ public class GameManager : MonoBehaviour
         {
             _IsLidPlaced = true;
             Debug.Log("GameManager: Lid has been placed.");
+            //Setscrews back
+            foreach (var screw in _Screws)
+            {
+                screw.SetActive(true);
+            }
             // End of tutorial
         }
 
