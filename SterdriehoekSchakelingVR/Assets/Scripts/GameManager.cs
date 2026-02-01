@@ -127,6 +127,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private List<ConnectorScript> _CorrectConnectors = new List<ConnectorScript>();
     [SerializeField] private GameObject _ConnectorPage;
+    
+    
+    [Header("Params Step 13")]
+    [SerializeField] private GameObject _PlaceLidPage;
+    [SerializeField] private bool _IsLidPlaced = false;
+    [SerializeField] private GameObject _LidTrigger;
+    [SerializeField] private LidTriggerScript _lidTriggerScript;
+    
+    
     private void Awake()
     {
         // Init everything
@@ -179,8 +188,8 @@ public class GameManager : MonoBehaviour
         if (!_AreCablesCorrect)_AreCablesPlacedCorrectly();
 
         if (!_AreConnectorsCorrect) _AreConnectorsPlacedCorrectly();
-        
-        
+
+        if (!_IsLidPlaced) IsLidPlaced();
         
 
         if (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count)
@@ -284,6 +293,12 @@ public class GameManager : MonoBehaviour
                 objectsToEnable = _ConnectorTriggers,
                 interactablesToEnable = _connectorsGrabInteractables,
                 completionCondition = () => _AreConnectorsCorrect,
+            },
+            new Step
+            {
+                name = "Place the lid back in",
+                objectsToEnable = new List<GameObject>(){_LidTrigger},
+                completionCondition = () => _IsLidPlaced,
             }
         };
     }
@@ -367,11 +382,26 @@ public class GameManager : MonoBehaviour
         {
             _AreConnectorsCorrect = true;
             Debug.Log("GameManager: All connectors are placed correctly.");
-            //StartCoroutine(WaitForUserReading())
+            StartCoroutine(WaitForUserReading(_PlaceLidPage,_ConnectorPage));
         }
 
         return _AreConnectorsCorrect;
     }
+
+
+
+    private bool IsLidPlaced()
+    {
+        if (_lidTriggerScript.IsTriggerd)
+        {
+            _IsLidPlaced = true;
+            Debug.Log("GameManager: Lid has been placed.");
+            // End of tutorial
+        }
+
+        return _IsLidPlaced;
+    }
+    
 
     private bool IsLidRemoved()
     {
