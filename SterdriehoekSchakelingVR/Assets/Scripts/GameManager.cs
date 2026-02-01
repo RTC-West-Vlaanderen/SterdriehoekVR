@@ -136,9 +136,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LidTriggerScript _lidTriggerScript;
     [Header("Params Step 14")]
     [SerializeField] private List<GameObject> _Screws = new List<GameObject>();
-    
 
-    
+    //[SerializeField] private GameObject _RestartButton;
+    [SerializeField] private GameObject _FinalPage;
+    [SerializeField] private TextMeshPro _FinalCode;
+
+    protected List<int> _WinningCodes = new List<int>()
+    {
+        673627,
+        489106,
+        876074,
+        114704,
+        406575,
+        556993,
+        474335,
+        932124,
+        533358,
+        654672
+    };
     private void Awake()
     {
         // Init everything
@@ -425,11 +440,27 @@ public class GameManager : MonoBehaviour
             {
                 screw.SetActive(true);
             }
+            // Set the final page active
+            StartCoroutine(WaitForUserReading(_FinalPage,_PlaceLidPage));
+            // Get one random code from the winning codes
+            System.Random rand = new System.Random();
+            int index = rand.Next(_WinningCodes.Count);
+            int winningCode = _WinningCodes[index];
+            _FinalCode.text = winningCode.ToString();
+            //_RestartButton.SetActive(true);
             // End of tutorial
+            Debug.Log("GameManager: Tutorial completed!");
+            // Show last page with code and restart button
         }
 
         return _IsLidPlaced;
     }
+
+    public void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+    
     
 
     private bool IsLidRemoved()
