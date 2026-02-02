@@ -536,24 +536,46 @@ public class GameManager : MonoBehaviour
     public void CheckSecondpageAnswers()
     {
         bool isCorrect = true;
-
+        List<int> values = new List<int>();
+    
+        // First pass: collect all values and check if they're valid
         foreach (var input in _SecondQuestionText)
         {
             string raw = input.text.Trim();
 
-            if (int.TryParse(raw, out int numberFilled) && numberFilled == 230)
+            if (int.TryParse(raw, out int numberFilled) && (numberFilled == 230 || numberFilled == 240))
+            {
+                values.Add(numberFilled);
+            }
+            else
+            {
+                isCorrect = false;
+                break;
+            }
+        }
+    
+        // Check if all values are the same
+        if (isCorrect && values.Count > 0)
+        {
+            int firstValue = values[0];
+            isCorrect = values.All(v => v == firstValue);
+        }
+    
+        // Second pass: color the inputs based on result
+        foreach (var input in _SecondQuestionText)
+        {
+            if (isCorrect)
             {
                 input.textComponent.color = Color.green;
             }
             else
             {
                 input.textComponent.color = Color.red;
-                isCorrect = false;
             }
         }
 
         _SecondCorrectQuestion = isCorrect;
-        if (_SecondCorrectQuestion)StartCoroutine(WaitForUserReading(_ThirdQuestionPage,_SecondQuestionPage));
+        if (_SecondCorrectQuestion) StartCoroutine(WaitForUserReading(_ThirdQuestionPage, _SecondQuestionPage));
     }
 
     public void CheckThirdpageAnswers()
