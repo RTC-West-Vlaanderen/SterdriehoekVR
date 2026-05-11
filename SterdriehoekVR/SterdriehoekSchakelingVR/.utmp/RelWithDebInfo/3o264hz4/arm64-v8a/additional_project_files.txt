@@ -1,0 +1,17 @@
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\GAToUnityCallbacks.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\MacroEnd.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\MacroHeaderBegin.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\MacroSourceBegin.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAApplication.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAConfiguration.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGADebug.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAEvents.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAInput.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGASoftKeyboard.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGASoftKeyboardCallbacks.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGATypes.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAVersion.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGACallbacks.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAConfigurationCallbacks.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAKeyEventCallbacks.h
+C:\StredriehoekVR\SterdriehoekVR\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAMotionEventCallbacks.h

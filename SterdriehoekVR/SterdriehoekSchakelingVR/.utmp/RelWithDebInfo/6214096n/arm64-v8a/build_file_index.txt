@@ -1,0 +1,2 @@
+C:\College-2025\stage\sterdriehoek\SterdriehoekVR-main\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\College-2025\stage\sterdriehoek\SterdriehoekVR-main\SterdriehoekSchakelingVR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
