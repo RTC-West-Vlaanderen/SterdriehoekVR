@@ -55,6 +55,19 @@ public class LanguageManager : MonoBehaviour
     private string PersistentPath => Path.Combine(Application.persistentDataPath, FileName);
     private string StreamingPath => Path.Combine(Application.streamingAssetsPath, FileName);
 
+    [SerializeField] private List<SpriteRenderer> _spriteRendererSceneNewColors;
+    [SerializeField] private Sprite _SpriteSterNewcolors;
+    [SerializeField] private Sprite _SpriteSterNewcolorsFR;
+    
+    [SerializeField] private List<SpriteRenderer> _spriteRendererSceneNewColorsWithCoding;
+    [SerializeField] private Sprite _SpritespriteRendererSceneNewColorsWithCoding;
+    [SerializeField] private Sprite _SpritespriteRendererSceneNewColorsWithCodingFR;
+    
+    [SerializeField] private List<SpriteRenderer> _spriteRendererSceneNDriehoek;
+    [SerializeField] private Sprite _SpriteDriehoekNewcolors;
+    [SerializeField] private Sprite _SpriteDriehoekNewcolorsFR;
+
+    
     private void Start()
     {
         LanguageManagerSingleton = this;
@@ -128,8 +141,31 @@ public class LanguageManager : MonoBehaviour
         _isFrench = isFrench;
         _hasUserPickLanguage = true;
         OnLanguageChanged?.Invoke(); // <-- dit triggert alle teksten om te updaten
+        ChangeImagesByLanguage();
     }
 
+    void ChangeImagesByLanguage()
+    {
+        Sprite sterSprite = _isFrench ? _SpriteSterNewcolorsFR : _SpriteSterNewcolors;
+        ApplySpriteToList(_spriteRendererSceneNewColors, sterSprite);
+
+        Sprite codingSprite = _isFrench 
+            ? _SpritespriteRendererSceneNewColorsWithCodingFR 
+            : _SpritespriteRendererSceneNewColorsWithCoding;
+        ApplySpriteToList(_spriteRendererSceneNewColorsWithCoding, codingSprite);
+
+        Sprite driehoekSprite = _isFrench ? _SpriteDriehoekNewcolorsFR : _SpriteDriehoekNewcolors;
+        ApplySpriteToList(_spriteRendererSceneNDriehoek, driehoekSprite);
+    }
+
+    private void ApplySpriteToList(List<SpriteRenderer> renderers, Sprite sprite)
+    {
+        foreach (SpriteRenderer renderer in renderers)
+        {
+            if (renderer != null)
+                renderer.sprite = sprite;
+        }
+    }
     /// <summary>
     /// Handig om vanop het toestel zelf (of via een debug-scherm) een nieuwe entry toe te voegen
     /// en meteen op te slaan naar persistentDataPath.
@@ -157,4 +193,7 @@ public class LanguageManager : MonoBehaviour
         File.WriteAllText(PersistentPath, json);
         Debug.Log($"[LanguageManager] JSON opgeslagen naar: {PersistentPath}");
     }
+    
+    
+    
 }
