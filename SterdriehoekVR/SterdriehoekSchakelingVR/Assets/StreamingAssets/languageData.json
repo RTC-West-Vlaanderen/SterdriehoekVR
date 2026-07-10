@@ -1,0 +1,38 @@
+{
+  "entries": [
+    {"key": "start_button", "nl": "Start", "fr": "Démarrer" },
+    {"key":"Netspanning","nl":"Netspanning","fr":"Tension secteur"},
+    {"key": "titel", "nl": "Sterdriehoek VR", "fr": "Étoile-triangle VR"},
+    {"key": "Driefasen 3x230V", "nl": "Driefasen 3x230V","fr": "Triphasé 3x230V"},
+    {"key": "Drijfkracht 3x400V+N","nl": "Drijfkracht 3x400V+N", "fr": "Alimentation 3x400V+N"},
+    {"key": "Monofasen 2x230V","nl": "Monofasen 2x230V","fr":"Monophasé 2x230V" },
+    {"key": "Welke spanning is door de netbeheerder voorzien?\nGa hiervoor naar de zekeringskast.","nl": "Welke spanning is door de netbeheerder voorzien?\nGa hiervoor naar de zekeringskast.","fr": "Quelle est la tension prévue par le gestionnaire de réseau ?\nPour le savoir, rendez-vous au tableau électrique."},
+    {"key": "netspanning","nl": "Netspanning","fr": "tension secteur"},
+    {"key": "exit_button", "nl": "Afsluiten", "fr": "Quitter" },
+    {"key": "Bevestig","nl": "Bevestig", "fr": "Confirmer"},
+    {"key": "Hoeveel volt krijgt een spoel binnen deze schakeling?","nl": "Hoeveel volt krijgt een spoel binnen deze schakeling?", "fr": "Combien de volts reçoit une bobine dans ce circuit ?"},
+    {"key": "Spoelspanning","nl": "Spoelspanning", "fr": "Tension de la bobine"},
+    {"key":"Vul in...","nl":"Vul in...","fr":"Remplir..."},
+    {"key": "Bekijk het plaatje op de motor, wat is de laagste spanningswaarde?","nl": "Bekijk het plaatje op de motor, wat is de laagste spanningswaarde?", "fr": "Regardez l'image sur le moteur, quelle est la valeur de tension la plus basse ?"}
+    ,{"key": "Spanning","nl": "Spanning", "fr": "Tension"},
+    {"key":"Vraag","nl":"Vraag","fr":"Question"},
+    {"key":"Driehoek","nl":"Driehoek","fr":"Triangle"},
+    {"key":"Ster","nl":"Ster","fr":"Étoile"},
+    {"key":"In welke schakeling is de spoelspanning 230V?","nl":"In welke schakeling is de spoelspanning 230V?","fr":"Dans quel circuit la tension de la bobine est-elle de 230 V ?"},
+    {"key":"Vul de correcte klembenamingen (U1, V1, W1 en U2, V2, W2) in op de sterschakeling.","nl":"Vul de correcte klembenamingen (U1, V1, W1 en U2, V2, W2) in op de sterschakeling.","fr":"Remplissez les désignations correctes des bornes (U1, V1, W1 et U2, V2, W2) sur le circuit en étoile."},
+    {"key":"Codering","nl":"Codering","fr":"Codage"},
+    {"key":"Draai de schroeven van de motor los.","nl":"Draai de schroeven van de motor los.","fr":"Desserrer les vis du moteur."},
+    {"key":"Motor­schroeven losdraaien","nl":"Motor­schroeven losdraaien","fr":"Desserrer les vis du moteur"},
+    {"key":"Neem het deksel af.","nl":"Neem het deksel af.","fr":"Retirez le couvercle."},
+    {"key": "Deksel afnemen","nl":"Deksel afnemen","fr":"Retirer le couvercle"},
+    {"key":"Plaats de kabels correct volgens het schema.","nl":"Plaats de kabels correct volgens het schema.","fr":"Placez les câbles correctement selon le schéma."},
+    {"key":"Kabels correct aansluiten","nl":"Kabels correct aansluiten","fr":"Raccorder correctement les câbles"},
+    {"key":"Plaats de bruggen correct volgens het schema.","nl":"Plaats de bruggen correct volgens het schema.","fr":"Placez les ponts correctement selon le schéma."},
+    {"key":"Bruggen correct aansluiten","nl":"Bruggen correct aansluiten","fr":"Raccorder correctement les ponts"},
+    {"key":"Goed! Plaats het deksel terug op de motor.","nl":"Goed! Plaats het deksel terug op de motor.","fr":"Bien ! Remettez le couvercle sur le moteur."},
+    {"key":"Motor­deksel terug plaatsen","nl":"Motor­deksel terug plaatsen","fr":"Remettre le couvercle du moteur en place"},
+    {"key":"Speel opnieuw","nl":"Speel opnieuw","fr":"Rejouer"},
+    {"key":"Goed zo! Je hebt de motor correct geschakeld. Leg de VR bril terug en vul deze code in op het scherm:","nl":"Goed zo! Je hebt de motor correct geschakeld. Leg de VR bril terug en vul deze code in op het scherm:","fr":"Bien joué ! Vous avez correctement câblé le moteur. Remettez le casque VR et saisissez ce code à l'écran :"},
+    {"key":"Code invoeren - einde","nl":"Code invoeren - einde","fr":"Saisir le code - fin"}
+    ]
+}   
