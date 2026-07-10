@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<AudioClip> _instructionClipsVL = new List<AudioClip>();
 
     // English
-    [SerializeField] private List<AudioClip> _instructionClipsEN = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> _instructionClipsFR = new List<AudioClip>();
 
     // List of steps in the tutorial
     [SerializeField] private List<Step> _steps = new List<Step>();
@@ -44,8 +44,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private XRGrabInteractable _ScrewdriverInteractable;
 
-    [Header("Params Step1")] [SerializeField]
-    private bool _IsUserAtWorkbench = false;
+    [Header("Params pick a language")] 
+    [SerializeField] bool _IsFrench = false;
+    private bool _HasUserPickedALanguage = false;
+    
+    
+    [Header("Params Step1")] 
+    [SerializeField] private bool _IsUserAtWorkbench = false;
     [SerializeField] private Button _startButton;
     [SerializeField] private WorkBenchTriggerScript _teleportTriggerWorkbench;
 
@@ -191,6 +196,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_HasUserPickedALanguage) HasUserPickedALanguage();
+        
         // Check if user has started the app
         if (!_HasUserStartedTheApp) HasUserStartedTheApp();
         
@@ -222,25 +229,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-   /* private bool HasScrewedLidBack()
+    private void HasUserPickedALanguage()
     {
-        // Check if all XRScrewBack instances report the screw as no longer removed
-        // (i.e. every screw has been fully screwed back in)
-        if (_screwBacks != null && _screwBacks.Length > 0
-                                && _screwBacks.All(sb => !sb.IsScrewRemoved))
-        {
-            _HasUserScrewedLidBack = true;
-            Debug.Log("GameManager: User has screwed the lid back on.");
-        }
-
-        return _HasUserScrewedLidBack;
+        _HasUserPickedALanguage = LanguageManager.LanguageManagerSingleton.HasUserPickLanguage;
     }
-*/
     // Initialize the steps of the tutorial
     private void InitializeSteps()
     {
         _steps = new List<Step>
         {
+            new Step
+            {
+                name = "Select Language",
+                // Complete when user is at the workbench
+                completionCondition = () => _HasUserPickedALanguage
+                //onCompleteAction = () => _goodSFX.Play(),
+            },
             new Step
             {
                 name = "Teleport To workbench",
