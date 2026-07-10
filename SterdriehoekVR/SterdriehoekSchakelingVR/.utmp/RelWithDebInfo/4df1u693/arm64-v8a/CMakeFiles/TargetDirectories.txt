@@ -1,0 +1,5 @@
+C:/StredriehoekVR/SterdriehoekVR/SterdriehoekVR/SterdriehoekSchakelingVR/.utmp/RelWithDebInfo/4df1u693/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/StredriehoekVR/SterdriehoekVR/SterdriehoekVR/SterdriehoekSchakelingVR/.utmp/RelWithDebInfo/4df1u693/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/StredriehoekVR/SterdriehoekVR/SterdriehoekVR/SterdriehoekSchakelingVR/.utmp/RelWithDebInfo/4df1u693/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/StredriehoekVR/SterdriehoekVR/SterdriehoekVR/SterdriehoekSchakelingVR/.utmp/RelWithDebInfo/4df1u693/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/StredriehoekVR/SterdriehoekVR/SterdriehoekVR/SterdriehoekSchakelingVR/.utmp/RelWithDebInfo/4df1u693/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
