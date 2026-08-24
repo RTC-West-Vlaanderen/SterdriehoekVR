@@ -1,10 +1,19 @@
 # ninja log v5
 42	2030	8053875823707170	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	6617c812c208d154
 24	2041	8053875823738206	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	8675fcfb536520a6
-1	2066	8053875824137529	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	528cac814c9f4148
-52	2078	8053875824261006	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	996bc55b44510d40
-9	2164	8053875825148215	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	a645f647a8d97c45
 64	2375	8053875827234791	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	efdd79b5dc4e8f57
+1	2066	8053875824137529	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	528cac814c9f4148
+9	2164	8053875825148215	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	a645f647a8d97c45
+52	2078	8053875824261006	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	996bc55b44510d40
 33	2418	8053875827693433	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	ae323bebfb26d9e0
-17	2531	8053875828788184	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	338e36d84535183
 2531	2751	8053875831030488	C:/StredriehoekVR/SterdriehoekVR/SterdriehoekVR/SterdriehoekSchakelingVR/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4df1u693/obj/arm64-v8a/libgame.so	5ac61f47da585bab
+17	2531	8053875828788184	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	338e36d84535183
+12	4951	8090215724900516	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	6617c812c208d154
+24	4952	8090215724915750	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	528cac814c9f4148
+33	4954	8090215724900516	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	8675fcfb536520a6
+41	4959	8090215725023067	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	996bc55b44510d40
+17	4970	8090215725098956	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	a645f647a8d97c45
+51	4994	8090215725371981	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	efdd79b5dc4e8f57
+46	5094	8090215726400784	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	ae323bebfb26d9e0
+1	5162	8090215727024966	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	338e36d84535183
+5162	5272	8090215728187867	C:/StredriehoekVR/SterdriehoekVR/SterdriehoekVR/SterdriehoekSchakelingVR/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4df1u693/obj/arm64-v8a/libgame.so	5ac61f47da585bab
