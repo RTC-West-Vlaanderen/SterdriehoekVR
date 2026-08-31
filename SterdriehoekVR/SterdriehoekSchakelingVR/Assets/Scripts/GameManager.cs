@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<AudioClip> _instructionClips = new List<AudioClip>();
     private int _currentStepIndex = -1;
     [SerializeField] private AudioSource _audioSource;
+    // Koppelt een pagina (GameObject) aan de index in _instructionClipsVL / _instructionClipsFR
+    // zodat de juiste narratie-audio automatisch afspeelt zodra die pagina actief wordt.
+    private Dictionary<GameObject, int> _pageNarrationIndex;
+
 
 
     [Header("XR Grab Interactable References")] [SerializeField]
@@ -159,10 +163,30 @@ public class GameManager : MonoBehaviour
         533358,
         654672
     };
-    private void Awake()
+private void Awake()
     {
         // Init everything
-        _instructionClips = _instructionClipsVL; // Future = Make it possible for en
+        if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null) _audioSource = gameObject.AddComponent<AudioSource>();
+
+        _pageNarrationIndex = new Dictionary<GameObject, int>();
+        void MapPage(GameObject page, int index)
+        {
+            if (page != null) _pageNarrationIndex[page] = index;
+        }
+        MapPage(_FirstQuestionPage, 0);
+        MapPage(_SecondQuestionPage, 1);
+        MapPage(_ThirdQuestionPage, 1);
+        MapPage(_FourthQuestionPage, 2);
+        MapPage(_FifthQuestionPage, 3);
+        MapPage(_SixthQuestionPage, 4);
+        MapPage(_SeventhQuestionPage, 5);
+        MapPage(_EightQuestionPage, 6);
+        MapPage(_CablePage, 7);
+        MapPage(_ConnectorPage, 8);
+        MapPage(_PlaceLidPage, 9);
+        MapPage(_FinalPage, 10);
+
         _steps = new List<Step>();
         InitializeSteps();
     }
@@ -192,6 +216,42 @@ public class GameManager : MonoBehaviour
 
         step.onStartAction?.Invoke();
     }
+
+
+    /// <summary>
+    /// Speelt de instructie-audio af voor de meegegeven pagina, in de huidige gekozen taal
+    /// (Vlaams of Frans), via de mapping die in Awake() is opgebouwd.
+    /// </summary>
+    private void PlayInstructionAudioForPage(GameObject page)
+    {
+        if (page != null && _pageNarrationIndex != null && _pageNarrationIndex.TryGetValue(page, out int index))
+        {
+            PlayInstructionAudio(index);
+        }
+    }
+
+    /// <summary>
+    /// Speelt de instructie-audio af op de gegeven index, in de huidige gekozen taal.
+    /// index verwijst naar dezelfde positie in _instructionClipsVL en _instructionClipsFR.
+    /// </summary>
+    private void PlayInstructionAudio(int index)
+    {
+        if (index < 0 || _audioSource == null) return;
+
+        bool isFrench = LanguageManager.LanguageManagerSingleton != null && LanguageManager.LanguageManagerSingleton.IsFrench;
+        List<AudioClip> clips = isFrench ? _instructionClipsFR : _instructionClipsVL;
+
+        if (clips == null || index >= clips.Count || clips[index] == null)
+        {
+            Debug.LogWarning($"GameManager: Geen instructie-audio gevonden voor index {index} (Frans={isFrench}).");
+            return;
+        }
+
+        _audioSource.Stop();
+        _audioSource.clip = clips[index];
+        _audioSource.Play();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -480,11 +540,12 @@ public class GameManager : MonoBehaviour
         return _IsLidRemoved;
     }
 
-    public void BtnHasUserStartedTheApp()
+public void BtnHasUserStartedTheApp()
     {
         _HasUserPressedStartButton = true;
         _StartPage.SetActive(false);
         _FirstQuestionPage.SetActive(true);
+        PlayInstructionAudioForPage(_FirstQuestionPage);
         Debug.Log("GameManager: User has started the app.");
     }
 
@@ -631,12 +692,13 @@ public class GameManager : MonoBehaviour
 
     
     
-    private IEnumerator WaitForUserReading(GameObject page1,GameObject page2)
+private IEnumerator WaitForUserReading(GameObject page1,GameObject page2)
     {
         // Wait for 2 seconds
         yield return new WaitForSeconds(2f);
         page1.SetActive(true);
         page2.SetActive(false);
+        PlayInstructionAudioForPage(page1);
     }
 
 
